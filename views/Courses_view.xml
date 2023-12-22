@@ -6,41 +6,37 @@
         <field name="res_model">e_learning.course</field>
         <field name="view_mode">tree,graph,form,search</field>
     </record>
-    <menuitem
-        id="elearning_menu"
-        name="E-Learning"/>
-    <menuitem
-        id="e-learning_menu"
-        name="E-Learning"
-        parent="elearning_menu"
-        action="action_elearning_action_form"
-        />
-    <record id="course_form_view" model="ir.ui.view">
+    <menuitem id="elearning_menu" name="E-Learning"/>
+    <menuitem id="e-learning_menu" name="e-learning" parent="elearning_menu" action="action_elearning_action_form"/>
+    
+   <record id="course_form_view" model="ir.ui.view">
         <field name="name">Course Form</field>
         <field name="model">e_learning.course</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button string="Start Course" type="object" name="start_course"/>
-                    <button string="Complete Course" type="object" name="complete_course"/>
+                    <button name="start_course" type="object" string="Start Course" class="oe_highlight"/>
+                    <button name="complete_course" string="Complete Course" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar"/>
                 </header>
-                <group>
+                <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="instructor_ids" widget="many2many_tags"/>
-                        <field name="state"/>
-                        <field name="price"/>
-                    </group>
-                    <group>
-                        <field name="start_date"/>
-                        <field name="end_date"/>
-                        <field name="description"/>
-                    </group>
-                </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="instructor_ids" widget="many2many_tags"/>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="description"/>
+                        </group>
+                    </group>  
+                </sheet>
             </form>
         </field>
     </record>
+
 
     <record id="course_tree_view" model="ir.ui.view">
         <field name="name">Course Tree</field>

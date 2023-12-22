@@ -12,9 +12,8 @@ class Course(models.Model):
     price = fields.Float(string='Course Price')
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('ongoing', 'Ongoing'),
-        ('completed', 'Completed')],
-        string='State', default='draft')
+        ('in progress', 'Ongoing'),
+        ('completed', 'Completed')],default='draft')
 
     @api.model
     def create(self, values):
@@ -22,7 +21,7 @@ class Course(models.Model):
         return course
 
     def start_course(self):
-        self.write({'state': 'ongoing'})
+        self.write({'state': 'in progress'})
 
     def complete_course(self):
         self.write({'state': 'completed'})
