@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <record id="action_elearning_action_form" model="ir.actions.act_window">
+        <field name="name">E-Learning</field>
+        <field name="res_model">e_learning.course</field>
+        <field name="view_mode">tree,graph,form,search</field>
+    </record>
+    <menuitem
+        id="elearning_menu"
+        name="E-Learning"/>
+    <menuitem
+        id="e-learning_menu"
+        name="E-Learning"
+        parent="elearning_menu"
+        action="action_elearning_action_form"
+        />
     <record id="course_form_view" model="ir.ui.view">
         <field name="name">Course Form</field>
         <field name="model">e_learning.course</field>
