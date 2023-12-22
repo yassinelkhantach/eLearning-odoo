@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="course_form_view" model="ir.ui.view">
+        <field name="name">Course Form</field>
+        <field name="model">e_learning.course</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Start Course" type="object" name="start_course"/>
+                    <button string="Complete Course" type="object" name="complete_course"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="instructor_ids" widget="many2many_tags"/>
+                        <field name="state"/>
+                        <field name="price"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="course_tree_view" model="ir.ui.view">
+        <field name="name">Course Tree</field>
+        <field name="model">e_learning.course</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="instructor_ids" widget="many2many_tags"/>
+                <field name="start_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="course_search_view" model="ir.ui.view">
+        <field name="name">Course Search</field>
+        <field name="model">e_learning.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="instructor_ids"/>
+                <filter string="No Instructors"
+                        name="without_instructor"
+                        domain="[('instructor_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="course_graph_view" model="ir.ui.view">
+        <field name="name">Course Graph</field>
+        <field name="model">e_learning.course</field>
+        <field name="arch" type="xml">
+            <graph string="Courses">
+                <field name="name" type="row"/>
+                <field name="start_date" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>
