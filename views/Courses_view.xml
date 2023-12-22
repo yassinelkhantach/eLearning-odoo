@@ -2,16 +2,16 @@
 <odoo>
 
     <record id="action_elearning_action_form" model="ir.actions.act_window">
-        <field name="name">E-Learning</field>
+        <field name="name">Learning Overview</field>
         <field name="res_model">e_learning.course</field>
-        <field name="view_mode">tree,graph,form,search</field>
+        <field name="view_mode">kanban,tree,graph,form,search</field>
     </record>
     <menuitem
         id="elearning_menu"
         name="E-Learning"/>
     <menuitem
         id="e-learning_menu"
-        name="E-Learning"
+        name="Courses"
         parent="elearning_menu"
         action="action_elearning_action_form"
         />
@@ -51,6 +51,39 @@
                 </div>
             </group>
         </form>
+    </field>
+</record>
+
+<record id="course_kanban_view" model="ir.ui.view">
+    <field name="name">Course Kanban</field>
+    <field name="model">e_learning.course</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_content">
+                        <div class="oe_kanban_global_left">
+                            <field name="name" class="oe_kanban_title"/>
+                        </div>
+                        <div class="oe_kanban_global_right">
+                            <div class="oe_kanban_tags">
+                                <field name="tags" widget="many2many_tags"/>
+                            </div>
+                            <field name="instructor_ids" widget="many2many_tags"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+            <groups>
+                <group>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="In Progress" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                    <filter string="Completed" name="completed" domain="[('state', '=', 'completed')]"/>
+                </group>
+            </groups>
+        </kanban>
     </field>
 </record>
 
