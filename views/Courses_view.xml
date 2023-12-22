@@ -15,32 +15,44 @@
         parent="elearning_menu"
         action="action_elearning_action_form"
         />
-    <record id="course_form_view" model="ir.ui.view">
-        <field name="name">Course Form</field>
-        <field name="model">e_learning.course</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
-                    <button string="Start Course" type="object" name="start_course"/>
-                    <button string="Complete Course" type="object" name="complete_course"/>
-                    <field name="state" widget="statusbar"/>
-                </header>
-                <group>
-                    <group>
-                        <field name="name"/>
-                        <field name="instructor_ids" widget="many2many_tags"/>
-                        <field name="state"/>
-                        <field name="price"/>
-                    </group>
-                    <group>
-                        <field name="start_date"/>
-                        <field name="end_date"/>
-                        <field name="description"/>
-                    </group>
-                </group>
-            </form>
-        </field>
-    </record>
+
+<record id="course_form_view" model="ir.ui.view">
+    <field name="name">Course Form</field>
+    <field name="model">e_learning.course</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button string="Start Course" type="object" name="start_course" class="oe_highlight"/>
+                <button string="Complete Course" type="object" name="complete_course" class="oe_highlight"/>
+                <field name="state" widget="statusbar"/>
+            </header>
+            <group>
+                <div class="row">
+                    <div class="col-md-8">
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="instructor_ids" widget="many2many_tags"/>
+                            <field name="price"/>
+                            <field name="tags" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="description"/>
+                        </group>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <div style="max-width: 200px; max-height: 200px;">
+                            <field name="photo" widget="image" options="{'size': (200, 200)}" class="rounded-circle"/>
+                        </div>
+                    </div>
+                </div>
+            </group>
+        </form>
+    </field>
+</record>
 
     <record id="course_tree_view" model="ir.ui.view">
         <field name="name">Course Tree</field>
