@@ -6,15 +6,8 @@ class Course(models.Model):
 
     name = fields.Char(string='Title', required=True)
     description = fields.Text(string='Description')
-    start_date = fields.Date(string='Start Date')
-    end_date = fields.Date(string='End Date')
-    instructor_ids = fields.Many2many('res.partner', string='Instructors')
     price = fields.Float(string='Course Price')
-    state = fields.Selection([
-        ('draft', 'Draft'),
-        ('in progress', 'Ongoing'),
-        ('completed', 'Completed')],default='draft')
-
+    duration_hours = fields.Float(string='Duration (hours)')
     tags = fields.Many2many('custom_module.course.tag', string='Tags')
     photo = fields.Binary(string='Photo')
 
@@ -22,13 +15,7 @@ class Course(models.Model):
     def create(self, values):
         course = super(Course, self).create(values)
         return course
-
-    def start_course(self):
-        self.write({'state': 'in progress'})
-
-    def complete_course(self):
-        self.write({'state': 'completed'})
-
+    
 class CourseTag(models.Model):
     _name = 'custom_module.course.tag'
     _description = 'Course Tags'
