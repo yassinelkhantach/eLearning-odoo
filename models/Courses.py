@@ -15,6 +15,9 @@ class Course(models.Model):
         ('in progress', 'Ongoing'),
         ('completed', 'Completed')],default='draft')
 
+    tags = fields.Many2many('custom_module.course.tag', string='Tags')
+    photo = fields.Binary(string='Photo')
+
     @api.model
     def create(self, values):
         course = super(Course, self).create(values)
@@ -25,3 +28,9 @@ class Course(models.Model):
 
     def complete_course(self):
         self.write({'state': 'completed'})
+
+class CourseTag(models.Model):
+    _name = 'custom_module.course.tag'
+    _description = 'Course Tags'
+
+    name = fields.Char(string='Tag Name', required=True)
