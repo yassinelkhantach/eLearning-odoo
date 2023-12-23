@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="action_elearning_action_form" model="ir.actions.act_window">
+    <record model="ir.actions.act_window" id="course_list_action">
         <field name="name">Learning Overview</field>
         <field name="res_model">e_learning.course</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
+        <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first course</p>
+        </field>
     </record>
-    <menuitem
-        id="elearning_menu"
-        name="E-Learning"/>
-    <menuitem
-        id="e-learning_menu"
-        name="Courses"
-        parent="elearning_menu"
-        action="action_elearning_action_form"
-        />
+
+         <!-- top level menu: no parent -->
+        <menuitem id="elearning_menu" name="E-learning"/>
+        <menuitem id="courses_menu" name="Courses" parent="elearning_menu"
+                  action="course_list_action"/>
 
 <record id="course_form_view" model="ir.ui.view">
     <field name="name">Course Form</field>
     <field name="model">e_learning.course</field>
     <field name="arch" type="xml">
         <form>
-            <header>
-                <button string="Start Course" type="object" name="start_course" class="oe_highlight"/>
-                <button string="Complete Course" type="object" name="complete_course" class="oe_highlight"/>
-                <field name="state" widget="statusbar"/>
-            </header>
-            <group>
-                <div class="row">
-                    <div class="col-md-8">
-                        <group>
-                            <field name="name"/>
-                        </group>
-                        <group>
-                            <field name="instructor_ids" widget="many2many_tags"/>
-                            <field name="price"/>
-                            <field name="tags" widget="many2many_tags"/>
-                        </group>
-                        <group>
-                            <field name="start_date"/>
-                            <field name="end_date"/>
-                            <field name="description"/>
-                        </group>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-center justify-content-center">
-                        <div style="max-width: 200px; max-height: 200px;">
-                            <field name="photo" widget="image" options="{'size': (200, 200)}" class="rounded-circle"/>
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 text-center">
+                                <field name="photo" widget="image" options="{'size': (200, 200)}" class="rounded-circle"/>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-md-8">
+                                <notebook>
+                                    <page string="Title and Tags" name="title_tags_page">
+                                        <group>
+                                            <label for="name" class="oe_edit_only">Course Title</label>
+                                            <h1>
+                                                <field name="name" class="o_field_char o_field_widget o_input o_required_modifier" placeholder="Enter the course title" type="text"/>
+                                            </h1>
+                                            <field name="tags" widget="many2many_tags" class="o_field_many2manytags o_input o_field_widget"/>
+                                        </group>
+                                    </page>
+                                    <page string="Instructor and Price" name="instructor_price_page">
+                                        <group>
+                                            <field name="instructor_ids" widget="many2many_tags"/>
+                                            <field name="price"/>
+                                        </group>
+                                    </page>
+                                    <page string="Dates and Description" name="dates_description_page">
+                                        <group>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                            <field name="description"/>
+                                        </group>
+                                    </page>
+                                </notebook>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </group>
+            </div>
         </form>
     </field>
 </record>
