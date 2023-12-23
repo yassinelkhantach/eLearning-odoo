@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="action_elearning_action_form" model="ir.actions.act_window">
+    <record id="action_courses_action_form" model="ir.actions.act_window">
         <field name="name">Learning Overview</field>
-        <field name="res_model">e_learning.course</field>
+        <field name="res_model">courses.course</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
     </record>
     <menuitem
-        id="elearning_menu"
-        name="E-Learning"/>
+        id="courses_menu"
+        name="e-courses"/>
     <menuitem
-        id="e-learning_menu"
+        id="ecourses_menu"
         name="Courses"
-        parent="elearning_menu"
-        action="action_elearning_action_form"
+        parent="courses_menu"
+        action="action_courses_action_form"
         />
 
 <record id="course_form_view" model="ir.ui.view">
     <field name="name">Course Form</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">courses.course</field>
     <field name="arch" type="xml">
         <form>
             <header>
@@ -56,7 +56,7 @@
 
 <record id="course_kanban_view" model="ir.ui.view">
     <field name="name">Course Kanban</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">courses.course</field>
     <field name="arch" type="xml">
         <kanban>
             <templates>
@@ -89,7 +89,7 @@
 
     <record id="course_tree_view" model="ir.ui.view">
         <field name="name">Course Tree</field>
-        <field name="model">e_learning.course</field>
+        <field name="model">courses.course</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -101,7 +101,7 @@
 
     <record id="course_search_view" model="ir.ui.view">
         <field name="name">Course Search</field>
-        <field name="model">e_learning.course</field>
+        <field name="model">courses.course</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
@@ -115,7 +115,7 @@
 
     <record id="course_graph_view" model="ir.ui.view">
         <field name="name">Course Graph</field>
-        <field name="model">e_learning.course</field>
+        <field name="model">courses.course</field>
         <field name="arch" type="xml">
             <graph string="Courses">
                 <field name="name" type="row"/>

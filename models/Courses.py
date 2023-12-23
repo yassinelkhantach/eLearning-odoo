@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class Course(models.Model):
-    _name = 'e_learning.course'
+    _name = 'courses.course'
     _description = 'Courses'
 
     name = fields.Char(string='Title', required=True)
@@ -30,7 +30,7 @@ class Course(models.Model):
         self.write({'state': 'completed'})
 
 class CourseTag(models.Model):
-    _name = 'custom_module.course.tag'
+    _name = 'courses.course.tag'
     _description = 'Course Tags'
 
     name = fields.Char(string='Tag Name', required=True)
