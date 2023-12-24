@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="attachment_list_action">
+        <field name="name">Learning Overview</field>
+        <field name="res_model">e_learning.attachment</field>
+        <field name="view_mode">kanban,tree,graph,form,search</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first Attachment</p>
+        </field>
+    </record>
+
+    <!-- top-level menu: no parent -->
+    <menuitem id="elearning_menu" name="E-learning"/>
+    <menuitem id="attachments_menu" name="Attachments" parent="elearning_menu"
+              action="attachment_list_action"/>
+
+    <record id="attachemnet_form_view" model="ir.ui.view">
+        <field name="name">Attachment Form</field>
+        <field name="model">e_learning.attachment</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-8">
+                                    <group>
+                                        <field name="file" widget="binary" placeholder="Upload a file"/>
+                                    </group>
+                                    <group>
+                                        <field name="lesson_id" widget="many2one" placeholder="Select a Lesson"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+<record id="attachment_kanban_view" model="ir.ui.view">
+    <field name="name">Attachment Kanban</field>
+    <field name="model">e_learning.attachment</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_content">
+                        <div class="oe_kanban_global_left" style="display: flex; align-items: center;">
+                            <div class="ml-4">
+                                <div style="font-size: 18px; font-weight: bold;">
+                                    <field name="lesson_id" options="{'no_create_edit': True}" placeholder="Lesson"/>      
+                                </div>
+                                <div class="mt-2">
+                                    <div>
+                                        <field name="file" class="oe_kanban_title"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<record id="attachment_tree_view" model="ir.ui.view">
+    <field name="name">Attachment Tree</field>
+    <field name="model">e_learning.attachment</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="lesson_id" string="Lesson" class="oe_lesson" />
+            <field name="file" string="Attachment File" class="oe_file" />
+        </tree>
+    </field>
+</record>
+
+<record id="Attachment_search_view" model="ir.ui.view">
+    <field name="name">Attachment Search</field>
+    <field name="model">e_learning.attachment</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="lesson_id"/>
+        </search>
+    </field>
+</record>
+
+<record id="attachment_graph_view" model="ir.ui.view">
+    <field name="name">Attachment Graph</field>
+    <field name="model">e_learning.attachment</field>
+    <field name="arch" type="xml">
+        <graph string="Attachments">
+            <field name="lesson_id" type="row"/>
+        </graph>
+    </field>
+</record>
+</odoo>

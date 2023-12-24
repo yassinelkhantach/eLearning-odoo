@@ -1,1 +1,1 @@
-from . import Courses, CourseTag, User, EnrollCourse, Rating, Attachement, Lesson
+from . import Courses, CourseTag, User, EnrollCourse, Rating, Attachment, Lesson

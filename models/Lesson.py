@@ -12,6 +12,10 @@ class Lesson(models.Model):
 
     course_id = fields.Many2one('e_learning.course', string='Course', required=True)
 
+    def name_get(self):
+        res = super(Lesson, self).name_get()
+        return [(lesson.id, lesson.title) for lesson in self]
+
     @api.model
     def create(self, values):
         lesson = super(Lesson, self).create(values)
