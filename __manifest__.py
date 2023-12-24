@@ -1,6 +1,10 @@
 {
-    'name': 'e-learning',
+    'name': 'E-Courses',
+    'version': '1.0',
+    'depends': ['base',"website"],
     'data': [
-        'views/Courses_view.xml',
-    ]
+      
+    ],
+    'installable': True,
+    'application': True,
 }
