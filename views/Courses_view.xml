@@ -30,25 +30,20 @@
                         </div>
                         <div class="row justify-content-center mt-3">
                             <div class="col-md-8">
+                                <group>
+                                    <field name="name" placeholder="Enter the course title" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                </group>
                                 <notebook>
-                                    <page string="Title and Tags" name="title_tags_page">
+                                    <page string="Tags and Description" name="tags_description_page">
                                         <group>
-                                            <label for="name" class="oe_edit_only">Course Title</label>
-                                            <h1>
-                                                <field name="name" class="o_field_char o_field_widget o_input o_required_modifier" placeholder="Enter the course title" type="text"/>
-                                            </h1>
                                             <field name="tags" widget="many2many_tags" class="o_field_many2manytags o_input o_field_widget"/>
+                                            <field name="description"/>
                                         </group>
                                     </page>
                                     <page string="Price and Duration" name="price_duration_page">
                                         <group>
                                             <field name="duration_hours"/>
                                             <field name="price"/>
-                                        </group>
-                                    </page>
-                                    <page string="Description" name="description_page">
-                                        <group>
-                                            <field name="description"/>
                                         </group>
                                     </page>
                                 </notebook>
