@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id='website_homepage' name="Odoo Courses Homepage">
+        <!-- Header Section -->
+        <header class="bg-primary text-white py-4">
+            <div class="container d-flex justify-content-between">
+                <img src="[Your Logo URL]" alt="E-Courses Logo" class="img-fluid" style="max-height: 50px;"/>
+                <div class="float-right">
+                    <a href="#" class="text-white mx-2">Login</a>
+                    <a href="#" class="btn btn-light">Register</a>
+                </div>
+            </div>
+        </header>
+        <div class="container mt-5">
+            <!-- Include Bootstrap CSS -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+
+              <!-- Header Section -->
+            <section class="text-center">
+                <h1>Welcome to E-Courses Platfom</h1>
+                <p>Your Gateway to Quality Online Courses</p>
+            </section>
+
+
+            <!-- Featured Courses Section -->
+            <section class="my-5">
+                <h2 class="text-center mb-4">Featured Courses</h2>
+                <div class="row">
+                    <!-- Course 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <!-- Course Image -->
+                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
+
+                            <!-- Course Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">Course Title 1</h5>
+                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <!-- Repeat similar structure for additional courses -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <!-- Course Image -->
+                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
+
+                            <!-- Course Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">Course Title 2</h5>
+                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <!-- Course Image -->
+                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
+
+                            <!-- Course Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">Course Title 3</h5>
+                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="my-5">
+                <h2 class="text-center mb-4">Why Choose E-Courses?</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Expert Instructors</h4>
+                        <p>Learn from industry experts with real-world experience.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Interactive Learning</h4>
+                        <p>Engage in hands-on activities and interactive lessons.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Flexible Schedule</h4>
+                        <p>Study at your own pace, anytime, anywhere.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="my-5">
+                <h2 class="text-center mb-4">What Our Students Say</h2>
+                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                    <!-- Carousel Content Goes Here -->
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="text-center my-5">
+                <h2>Start Your Learning Journey Today!</h2>
+                <p>Explore our courses and unlock a world of knowledge.</p>
+                <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+            </section>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>2023 E-Courses Platform. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="#">Privacy Policy</a>
+                        <span class="mx-2">|</span>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </template>
+
+    <!-- Extend website.assets_frontend to include Bootstrap -->
+    <template id="assets_frontend" name="Your Assets" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <!-- Bootstrap JavaScript (Optional) -->
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+            <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </xpath>
+    </template>
+</odoo>

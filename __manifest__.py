@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',"website"],
+    'depends': ['base',"web","website"],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/Users_view.xml',
         'views/Lessons_view.xml',
         'views/Attachments_view.xml',
+        'views/home.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
