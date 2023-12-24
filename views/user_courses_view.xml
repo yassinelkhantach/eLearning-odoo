@@ -2,7 +2,33 @@
 <odoo>
     <template id="courses_template" name="My Courses">
         <t t-call="website.layout">
-            Hello world !
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>My Courses</h1>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="courses" t-as="course">
+                                    <tr>
+                                        <td><t t-esc="course.name"/></td>
+                                        <td><t t-esc="course.start_date"/></td>
+                                        <td><t t-esc="course.end_date"/></td>
+                                        <td><t t-esc="course.price"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </t>
     </template>
 </odoo>
