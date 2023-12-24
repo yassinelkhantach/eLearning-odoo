@@ -1,11 +1,11 @@
 {
-    'name': "e-learning",
+    'name': "e_courses",
 
     'summary': """Manage trainings""",
 
     'description': """
-        e-learning module for managing trainings:
-            - training courses
+        e-courses module for managing trainings:
+            - training courses : courses -> lessons -> attachments
             - training sessions
             - attendees registration
     """,

@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class User(models.Model):
-    _name = 'e_learning.user'
+    _name = 'e_courses.user'
     _description = 'Users'
 
     first_name = fields.Char(string='First Name', required=True)

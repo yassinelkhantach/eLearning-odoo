@@ -3,7 +3,7 @@
 
     <record model="ir.actions.act_window" id="user_list_action">
         <field name="name">Learning Overview</field>
-        <field name="res_model">e_learning.user</field>
+        <field name="res_model">e_courses.user</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create the first user</p>
@@ -17,7 +17,7 @@
 
     <record id="user_form_view" model="ir.ui.view">
         <field name="name">User Form</field>
-        <field name="model">e_learning.user</field>
+        <field name="model">e_courses.user</field>
         <field name="arch" type="xml">
             <form>
                 <div class="container mt-4">

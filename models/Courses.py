@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class Course(models.Model):
-    _name = 'e_learning.course'
+    _name = 'e_courses.course'
     _description = 'Courses'
 
     title = fields.Char(string='Title', required=True)
@@ -14,7 +14,7 @@ class Course(models.Model):
     enrollment_deadline = fields.Date(string='Enrollment Deadline')
     instructor_ids = fields.Many2many('res.partner', string='Instructors')
     created_at = fields.Datetime(string='Created At', default=fields.Datetime.now)
-    tags = fields.Many2many('custom_module.course.tag', string='Tags')
+    tags = fields.Many2many('e_courses.course.tag', string='Tags')
     
     def name_get(self):
         res = super(Course, self).name_get()

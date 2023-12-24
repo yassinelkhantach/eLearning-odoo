@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class Lesson(models.Model):
-    _name = 'e_learning.lesson'
+    _name = 'e_courses.lesson'
     _description = 'Course Lessons'
 
     title = fields.Text(string='Title', required=True)
@@ -10,7 +10,7 @@ class Lesson(models.Model):
     document = fields.Binary(string='Document')
     duration = fields.Float(string='Duration (hours)')
 
-    course_id = fields.Many2one('e_learning.course', string='Course', required=True)
+    course_id = fields.Many2one('e_courses.course', string='Course', required=True)
 
     def name_get(self):
         res = super(Lesson, self).name_get()

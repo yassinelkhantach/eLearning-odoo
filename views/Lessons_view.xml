@@ -3,7 +3,7 @@
 
     <record model="ir.actions.act_window" id="lesson_list_action">
         <field name="name">Learning Overview</field>
-        <field name="res_model">e_learning.lesson</field>
+        <field name="res_model">e_courses.lesson</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create the first lesson</p>
@@ -17,7 +17,7 @@
 
     <record id="lesson_form_view" model="ir.ui.view">
         <field name="name">Lesson Form</field>
-        <field name="model">e_learning.lesson</field>
+        <field name="model">e_courses.lesson</field>
         <field name="arch" type="xml">
             <form>
                 <div class="container mt-4">
@@ -48,7 +48,7 @@
 
     <record id="lesson_kanban_view" model="ir.ui.view">
     <field name="name">Lesson Kanban</field>
-    <field name="model">e_learning.lesson</field>
+    <field name="model">e_courses.lesson</field>
     <field name="arch" type="xml">
         <kanban>
             <templates>
@@ -80,7 +80,7 @@
 
 <record id="lesson_tree_view" model="ir.ui.view">
     <field name="name">Lesson Tree</field>
-    <field name="model">e_learning.lesson</field>
+    <field name="model">e_courses.lesson</field>
     <field name="arch" type="xml">
         <tree>
             <field name="title" string="Lesson Title" class="oe_title" />
@@ -92,7 +92,7 @@
 
 <record id="lesson_search_view" model="ir.ui.view">
     <field name="name">Lesson Search</field>
-    <field name="model">e_learning.lesson</field>
+    <field name="model">e_courses.lesson</field>
     <field name="arch" type="xml">
         <search>
             <field name="title"/>
@@ -103,7 +103,7 @@
 
 <record id="lesson_graph_view" model="ir.ui.view">
     <field name="name">Lesson Graph</field>
-    <field name="model">e_learning.lesson</field>
+    <field name="model">e_courses.lesson</field>
     <field name="arch" type="xml">
         <graph string="Lessons">
             <field name="title" type="row"/>

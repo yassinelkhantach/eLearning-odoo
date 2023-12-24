@@ -3,7 +3,7 @@
 
     <record model="ir.actions.act_window" id="course_list_action">
         <field name="name">Learning Overview</field>
-        <field name="res_model">e_learning.course</field>
+        <field name="res_model">e_courses.course</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
         <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">Create the first course</p>
@@ -17,7 +17,7 @@
 
 <record id="course_form_view" model="ir.ui.view">
     <field name="name">Course Form</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">e_courses.course</field>
     <field name="arch" type="xml">
         <form>
             <div class="container mt-4">
@@ -63,7 +63,7 @@
 
 <record id="course_kanban_view" model="ir.ui.view">
     <field name="name">Course Kanban</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">e_courses.course</field>
     <field name="arch" type="xml">
         <kanban>
             <field name="photo" widget="image" options="{'size': (50, 50)}" class="rounded-circle"/>
@@ -100,7 +100,7 @@
 
 <record id="course_tree_view" model="ir.ui.view">
     <field name="name">Course Tree</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">e_courses.course</field>
     <field name="arch" type="xml">
         <tree>
             <field name="photo" widget="image" options="{'size': (50, 50)}" class="oe_avatar" />
@@ -114,7 +114,7 @@
 
 <record id="course_search_view" model="ir.ui.view">
     <field name="name">Course Search</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">e_courses.course</field>
     <field name="arch" type="xml">
         <search>
             <field name="title"/>
@@ -127,7 +127,7 @@
 
 <record id="course_graph_view" model="ir.ui.view">
     <field name="name">Course Graph</field>
-    <field name="model">e_learning.course</field>
+    <field name="model">e_courses.course</field>
     <field name="arch" type="xml">
         <graph string="Courses">
             <field name="title" type="row"/>

@@ -1,11 +1,11 @@
 from odoo import models, fields, api
 
 class Rating(models.Model):
-    _name = 'e_learning.rating'
+    _name = 'e_courses.rating'
     _description = 'Rating Courses'
 
-    course_id = fields.Many2one('e_learning.course', string='Course', required=True)
-    user_id = fields.Many2one('e_learning.user', string='User', required=True)
+    course_id = fields.Many2one('e_courses.course', string='Course', required=True)
+    user_id = fields.Many2one('e_courses.user', string='User', required=True)
     value = fields.Float(string='Rating')
 
     @api.model

@@ -3,7 +3,7 @@
 
     <record model="ir.actions.act_window" id="attachment_list_action">
         <field name="name">Learning Overview</field>
-        <field name="res_model">e_learning.attachment</field>
+        <field name="res_model">e_courses.attachment</field>
         <field name="view_mode">kanban,tree,graph,form,search</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create the first Attachment</p>
@@ -17,7 +17,7 @@
 
     <record id="attachemnet_form_view" model="ir.ui.view">
         <field name="name">Attachment Form</field>
-        <field name="model">e_learning.attachment</field>
+        <field name="model">e_courses.attachment</field>
         <field name="arch" type="xml">
             <form>
                 <div class="container mt-4">
@@ -43,7 +43,7 @@
 
 <record id="attachment_kanban_view" model="ir.ui.view">
     <field name="name">Attachment Kanban</field>
-    <field name="model">e_learning.attachment</field>
+    <field name="model">e_courses.attachment</field>
     <field name="arch" type="xml">
         <kanban>
             <templates>
@@ -70,7 +70,7 @@
 
 <record id="attachment_tree_view" model="ir.ui.view">
     <field name="name">Attachment Tree</field>
-    <field name="model">e_learning.attachment</field>
+    <field name="model">e_courses.attachment</field>
     <field name="arch" type="xml">
         <tree>
             <field name="lesson_id" string="Lesson" class="oe_lesson" />
@@ -81,7 +81,7 @@
 
 <record id="Attachment_search_view" model="ir.ui.view">
     <field name="name">Attachment Search</field>
-    <field name="model">e_learning.attachment</field>
+    <field name="model">e_courses.attachment</field>
     <field name="arch" type="xml">
         <search>
             <field name="lesson_id"/>
@@ -91,7 +91,7 @@
 
 <record id="attachment_graph_view" model="ir.ui.view">
     <field name="name">Attachment Graph</field>
-    <field name="model">e_learning.attachment</field>
+    <field name="model">e_courses.attachment</field>
     <field name="arch" type="xml">
         <graph string="Attachments">
             <field name="lesson_id" type="row"/>
