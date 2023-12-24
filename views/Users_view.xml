@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="user_list_action">
+        <field name="name">Learning Overview</field>
+        <field name="res_model">e_learning.user</field>
+        <field name="view_mode">kanban,tree,graph,form,search</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first user</p>
+        </field>
+    </record>
+
+    <!-- top-level menu: no parent -->
+    <menuitem id="elearning_menu" name="E-learning"/>
+    <menuitem id="users_menu" name="Users" parent="elearning_menu"
+              action="user_list_action"/>
+
+    <record id="user_form_view" model="ir.ui.view">
+        <field name="name">User Form</field>
+        <field name="model">e_learning.user</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-8">
+                                    <group>
+                                        <field name="first_name" placeholder="Enter the first name" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                        <field name="last_name" placeholder="Enter the last name" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                        <field name="birth_date"/>
+                                        <field name="email" widget="email" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                        <field name="password" class="o_field_char o_field_widget o_input o_required_modifier" password="True"/>
+                                        <field name="created_at" readonly="1"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>

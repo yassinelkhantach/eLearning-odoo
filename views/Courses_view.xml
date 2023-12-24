@@ -31,7 +31,7 @@
                         <div class="row justify-content-center mt-3">
                             <div class="col-md-8">
                                 <group>
-                                    <field name="name" placeholder="Enter the course title" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                    <field name="title" placeholder="Enter the course title" class="o_field_char o_field_widget o_input o_required_modifier" />
                                 </group>
                                 <notebook>
                                     <page string="Tags and Description" name="tags_description_page">
@@ -44,6 +44,11 @@
                                         <group>
                                             <field name="duration_hours"/>
                                             <field name="price"/>
+                                        </group>
+                                    </page>
+                                    <page string="Instructor" name="instructor_page">
+                                        <group>
+                                            <field name="instructor_ids" widget="many2many_tags"/>
                                         </group>
                                     </page>
                                 </notebook>
@@ -69,7 +74,7 @@
                             <field name="photo" widget="image" options="{'size': (100, 100)}" class="mr-3"/>
                             <div class="ml-4">
                                 <div style="font-size: 18px; font-weight: bold;">
-                                    <field name="name" class="oe_kanban_title"/>
+                                    <field name="title" class="oe_kanban_title"/>
                                 </div>
                                 <div class="oe_kanban_tags" style="overflow-x: auto; white-space: nowrap;">
                                     <field name="tags" widget="many2many_tags"/>
@@ -99,7 +104,7 @@
     <field name="arch" type="xml">
         <tree>
             <field name="photo" widget="image" options="{'size': (50, 50)}" class="oe_avatar" />
-            <field name="name" string="Course Title" class="oe_title" />
+            <field name="title" string="Course Title" class="oe_title" />
             <field name="tags" widget="many2many_tags" class="oe_tags" />
             <field name="price" string="Course Price" class="oe_price" />
             <field name="duration_hours" string="Duration" class="oe_duration" />
@@ -112,7 +117,9 @@
     <field name="model">e_learning.course</field>
     <field name="arch" type="xml">
         <search>
-            <field name="name"/>
+            <field name="title"/>
+            <field name="description"/>
+            <field name="tags"/>
             <field name="duration_hours"/>
         </search>
     </field>
@@ -123,7 +130,7 @@
     <field name="model">e_learning.course</field>
     <field name="arch" type="xml">
         <graph string="Courses">
-            <field name="name" type="row"/>
+            <field name="title" type="row"/>
             <field name="duration_hours" type="bar"/>
         </graph>
     </field>
