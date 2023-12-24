@@ -11,7 +11,7 @@
     </record>
 
          <!-- top level menu: no parent -->
-        <menuitem id="elearning_menu" name="E-learning"/>
+        <menuitem id="elearning_menu" name="E-Courses"/>
         <menuitem id="courses_menu" name="Courses" parent="elearning_menu"
                   action="course_list_action"/>
 
