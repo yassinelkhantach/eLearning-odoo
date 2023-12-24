@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="lesson_list_action">
+        <field name="name">Learning Overview</field>
+        <field name="res_model">e_learning.lesson</field>
+        <field name="view_mode">kanban,tree,graph,form,search</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first lesson</p>
+        </field>
+    </record>
+
+    <!-- top-level menu: no parent -->
+    <menuitem id="elearning_menu" name="E-learning"/>
+    <menuitem id="lessons_menu" name="Lessons" parent="elearning_menu"
+              action="lesson_list_action"/>
+
+    <record id="lesson_form_view" model="ir.ui.view">
+        <field name="name">Lesson Form</field>
+        <field name="model">e_learning.lesson</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-8">
+                                    <group>
+                                        <field name="title" placeholder="Enter the lesson title" class="o_field_char o_field_widget o_input o_required_modifier" />
+                                        <field name="objective"/>
+                                        <field name="video_url" placeholder="Enter the video URL" /> 
+                                    </group>
+                                    <group>
+                                        <field name="document" widget="binary" placeholder="Upload a document"/>
+                                        <field name="duration"/>
+                                    </group>
+                                    <group>
+                                        <field name="course_id" widget="many2one" placeholder="Select a Course"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>

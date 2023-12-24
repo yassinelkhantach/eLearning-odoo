@@ -16,6 +16,9 @@ class Course(models.Model):
     created_at = fields.Datetime(string='Created At', default=fields.Datetime.now)
     tags = fields.Many2many('custom_module.course.tag', string='Tags')
     
+    def name_get(self):
+        res = super(Course, self).name_get()
+        return [(course.id, course.title) for course in self]
 
     @api.model
     def create(self, values):
