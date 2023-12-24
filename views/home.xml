@@ -126,14 +126,4 @@
         </footer>
 
     </template>
-
-    <!-- Extend website.assets_frontend to include Bootstrap -->
-    <template id="assets_frontend" name="Your Assets" inherit_id="website.assets_frontend">
-        <xpath expr="." position="inside">
-            <!-- Bootstrap JavaScript (Optional) -->
-            <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-            <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        </xpath>
-    </template>
 </odoo>
