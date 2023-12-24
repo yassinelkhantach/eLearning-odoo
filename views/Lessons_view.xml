@@ -46,4 +46,69 @@
         </field>
     </record>
 
+    <record id="lesson_kanban_view" model="ir.ui.view">
+    <field name="name">Lesson Kanban</field>
+    <field name="model">e_learning.lesson</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_content">
+                        <div class="oe_kanban_global_left" style="display: flex; align-items: center;">
+                            <div class="ml-4">
+                                <div style="font-size: 18px; font-weight: bold;">
+                                    <field name="title" class="oe_kanban_title"/>
+                                </div>
+                                <div class="mt-2">
+                                    <div>
+                                        <i class="fa fa-bullseye mr-1" style="color: #27ae60;"></i>
+                                        <field name="objective" options="{'no_create_edit': True}"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-clock-o mr-1" style="color: #3498db;"></i>
+                                        <field name="duration" options="{'no_create_edit': True}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<record id="lesson_tree_view" model="ir.ui.view">
+    <field name="name">Lesson Tree</field>
+    <field name="model">e_learning.lesson</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="title" string="Lesson Title" class="oe_title" />
+            <field name="video_url" string="Lesson Url" class="oe_video" />
+            <field name="duration" string="Duration" class="oe_duration" />
+        </tree>
+    </field>
+</record>
+
+<record id="lesson_search_view" model="ir.ui.view">
+    <field name="name">Lesson Search</field>
+    <field name="model">e_learning.lesson</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="title"/>
+            <field name="duration"/>
+        </search>
+    </field>
+</record>
+
+<record id="lesson_graph_view" model="ir.ui.view">
+    <field name="name">Lesson Graph</field>
+    <field name="model">e_learning.lesson</field>
+    <field name="arch" type="xml">
+        <graph string="Lessons">
+            <field name="title" type="row"/>
+            <field name="duration" type="bar"/>
+        </graph>
+    </field>
+</record>
 </odoo>
