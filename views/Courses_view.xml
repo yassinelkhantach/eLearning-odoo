@@ -88,6 +88,10 @@
                                         <i class="fa fa-money mr-1" style="color: #27ae60;"></i>
                                         <field name="price" options="{'no_create_edit': True}"/>
                                     </div>
+                                     <div>
+                                        <i class="fa fa-star mr-1" style="color: #f39c12;"></i>
+                                        <field name="average_rating" options="{'no_create_edit': True}" widget="statinfo"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

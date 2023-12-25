@@ -31,6 +31,7 @@
         'views/Attachments_view.xml',
         'views/home.xml',
         'views/course_details.xml',
+        'views/Rating_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
