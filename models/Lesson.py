@@ -7,7 +7,6 @@ class Lesson(models.Model):
     title = fields.Text(string='Title', required=True)
     objective = fields.Text(string='Objective')
     video_url = fields.Char(string='Video URL')
-    document = fields.Binary(string='Document')
     duration = fields.Float(string='Duration (hours)')
 
     course_id = fields.Many2one('e_courses.course', string='Course', required=True)
