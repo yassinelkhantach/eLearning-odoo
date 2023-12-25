@@ -2,12 +2,11 @@
 <odoo>
     <template id='website_homepage' name="Odoo Courses Homepage">
         <!-- Header Section -->
-        <header class="bg-primary text-white py-4">
+        <header class="bg-primary text-white py-3">
             <div class="container d-flex justify-content-between">
-                <img src="[Your Logo URL]" alt="E-Courses" class="img-fluid" style="max-height: 50px;"/>
+                <img src="./../../e_courses/static/src/img/logo_white.png" alt="E-Courses" class="img-fluid" style="max-height: 50px;"/>
                 <div class="float-right">
-                    <a href="#" class="text-white mx-2">Login</a>
-                    <a href="#" class="btn btn-light">Register</a>
+                    <a href="/courses" class="btn btn-light px-4">Start Learning 🧠</a>
                 </div>
             </div>
         </header>
@@ -23,7 +22,7 @@
                         <div class="row mt-1 mb-3">
                             <div class="col">
                                 <p>Unleash your potential and take the next step in your career journey<br/>Our courses provide the spark you need to propel your career to new heights</p>
-                                <button class="btn btn-primary px-5">Explore courses ☛</button>
+                                <a href="/courses" class="btn btn-primary px-5">Explore courses ☛</a>
                             </div>
                         </div>
                     </div>
@@ -33,75 +32,36 @@
 
            <div class="container">
                <!-- Featured Courses Section -->
-               <section class="my-5 py-2">
-                   <div class="my-5">
-                       <h2 class="text-center mb-5">📘 Featured Courses</h2>
-                       <div class="row">
-                           <!-- Course 1 -->
-                           <div class="col-md-4">
-                               <div class="card">
-                                   <!-- Course Image -->
-                                   <img src="https://digitaldefynd.com/wp-content/uploads/2021/06/Blue-and-Red-Bold-Geometric-Work-from-Home-Simple-Presentation.webp" class="card-img-top" alt="Course Image"/>
+               <!-- Check if courses are not empty -->
+               <t t-if="courses">
+                   <section class="my-5 py-2">
+                       <div class="my-5">
+                           <h2 class="text-center mb-5">📘 Featured Courses</h2>
+                           <div class="row">
+                               <t t-foreach="courses" t-as="course">
+                                   <div class="col-md-4">
+                                       <div class="card">
+                                           <!-- Course Image -->
+                                           <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image"/>
 
-                                   <!-- Course Details -->
-                                   <div class="card-body">
-                                       <h5 class="card-title">Course Title 1</h5>
-                                       <span>Intermediate</span>
-                                       <span class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                                       <div class="row my-3">
-                                           <div class="col">
-                                               <i class="fa fa-money mr-1" style="color: #27ae60;"></i>
-                                               <span>1:00</span>
-                                           </div>
-                                           <div class="col">
-                                               <i class="fa fa-money mr-1" style="color: #27ae60;"></i>
-                                               <span>10$</span>
-                                           </div>
-                                           <div class="col">
-                                               <i class="fa fa-money mr-1" style="color: #27ae60;"></i>
-                                               <span>6.00</span>
+                                           <!-- Course Details -->
+                                           <div class="card-body">
+                                               <h5 class="card-title"><t t-esc="course.title"/></h5>
+<!--                                               <span><t t-esc="course.level"/></span>-->
+                                               <span class="card-text"><t t-esc="course.description"/></span>
+                                               <a href="/courses/9999" class="btn btn-outline-primary">Learn More</a>
                                            </div>
                                        </div>
-                                       <a href="#" class="btn btn-outline-primary">Learn More</a>
                                    </div>
-                               </div>
+                               </t>
                            </div>
-
-                           <!-- Course 2 -->
-                           <!-- Repeat similar structure for additional courses -->
-                           <div class="col-md-4">
-                               <div class="card">
-                                   <!-- Course Image -->
-                                   <img src="https://www.itrainu.in/wp-content/uploads/2018/11/Azure-training-IMG.jpg" class="card-img-top" alt="Course Image"/>
-
-                                   <!-- Course Details -->
-                                   <div class="card-body">
-                                       <h5 class="card-title">Course Title 2</h5>
-                                       <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                       <a href="#" class="btn btn-outline-primary">Learn More</a>
-                                   </div>
-                               </div>
-                           </div>
-
-                           <div class="col-md-4">
-                               <div class="card">
-                                   <!-- Course Image -->
-                                   <img src="https://img1.wsimg.com/isteam/ip/ef5318ee-2ffd-45ea-8e32-47eaf74d7727/azure-training-and-certification-course.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280,h:670" class="card-img-top" alt="Course Image"/>
-
-                                   <!-- Course Details -->
-                                   <div class="card-body">
-                                       <h5 class="card-title">Course Title 3</h5>
-                                       <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                       <a href="#" class="btn btn-outline-primary">Learn More</a>
-                                   </div>
-                               </div>
+                           <div class="row mt-5">
+                               <a href="/courses" class="btn btn-primary px-5 mx-auto">Explore more ☛</a>
                            </div>
                        </div>
-                       <div class="row mt-5">
-                           <button class="btn btn-primary px-5 mx-auto">Explore more ☛</button>
-                       </div>
-                   </div>
-               </section>
+                   </section>
+               </t>
+
 
                <!-- Why Choose Us Section -->
                <section class="my-5 py-2">
@@ -153,7 +113,7 @@
                    <div class="text-center my-5 ">
                        <h2>💡 Start Your Learning Journey Today! 🧠</h2>
                        <p>Explore our courses and unlock a world of knowledge.</p>
-                       <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+                       <a href="/courses" class="btn btn-primary btn-lg">Get Started</a>
                    </div>
                </section>
            </div>
