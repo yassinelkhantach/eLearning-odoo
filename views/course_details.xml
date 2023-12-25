@@ -124,7 +124,6 @@
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Document</th>
                                         <th>Duration</th>
                                         <th>Video URL</th>
                                     </tr>
@@ -134,19 +133,8 @@
                                         <tr>
                                             <!-- Lesson Title -->
                                             <td><t t-esc="lesson.title"/></td>
-
-                                            <!-- Document Link -->
-                                            <td class="text-center">
-                                                <t t-if="lesson.document">
-                                                    <a t-att-href="'data:file/pdf;base64,'+lesson.document.decode('utf-8')">
-                                                        <i class="fa fa-file text-secondary"></i>
-                                                    </a>
-                                                </t>
-                                            </td>
-
                                             <!-- Duration -->
                                             <td><t t-esc="lesson.duration"/> hours</td>
-
                                             <!-- Video URL Link -->
                                             <td class="text-center">
                                                 <t t-if="lesson.video_url">
