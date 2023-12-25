@@ -8,6 +8,7 @@ class Course(models.Model):
     description = fields.Char(string='Description')
     price = fields.Float(string='Course Price')
     photo = fields.Binary(string='Photo')
+    photo = fields.Binary(string='Photo')
     start_date = fields.Date(string='Start Date')
     end_date = fields.Date(string='End Date')
     duration_hours = fields.Float(string='Duration (hours)')
@@ -70,3 +71,13 @@ class Course(models.Model):
 
     def get_instructor_names(self):
         return ', '.join(self.instructor_ids.mapped('name'))
+    @api.model
+    def search_courses(self, query):
+        domain = ['|', ('title', 'ilike', query), ('description', 'ilike', query)]
+        courses = self.search(domain)
+        return courses
+
+    @api.model
+    def filter_courses_by_tags(self, tag_names):
+         tag_ids = self.env['e_courses.course.tag'].search([('name', 'in', tag_names)]).ids
+         return self.search([('tags', 'in', tag_ids)])

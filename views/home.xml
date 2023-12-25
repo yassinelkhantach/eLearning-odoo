@@ -2,126 +2,129 @@
 <odoo>
     <template id='website_homepage' name="Odoo Courses Homepage">
         <!-- Header Section -->
-        <header class="bg-primary text-white py-4">
+        <header class="bg-primary text-white py-3">
             <div class="container d-flex justify-content-between">
-                <img src="[Your Logo URL]" alt="E-Courses Logo" class="img-fluid" style="max-height: 50px;"/>
+                <img src="./../../e_courses/static/src/img/logo_white.png" alt="E-Courses" class="img-fluid" style="max-height: 50px;"/>
                 <div class="float-right">
-                    <a href="#" class="text-white mx-2">Login</a>
-                    <a href="#" class="btn btn-light">Register</a>
+                    <a href="/courses" class="btn btn-light px-4">Start Learning 🧠</a>
                 </div>
             </div>
         </header>
-        <div class="container mt-5">
+        <div class="">
             <!-- Include Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
-
-              <!-- Header Section -->
-            <section class="text-center">
-                <h1>Welcome to E-Courses Platfom</h1>
-                <p>Your Gateway to Quality Online Courses</p>
-            </section>
-
-
-            <!-- Featured Courses Section -->
-            <section class="my-5">
-                <h2 class="text-center mb-4">Featured Courses</h2>
-                <div class="row">
-                    <!-- Course 1 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <!-- Course Image -->
-                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
-
-                            <!-- Course Details -->
-                            <div class="card-body">
-                                <h5 class="card-title">Course Title 1</h5>
-                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="btn btn-primary">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Course 2 -->
-                    <!-- Repeat similar structure for additional courses -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <!-- Course Image -->
-                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
-
-                            <!-- Course Details -->
-                            <div class="card-body">
-                                <h5 class="card-title">Course Title 2</h5>
-                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="btn btn-primary">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <!-- Course Image -->
-                            <img src="[Course Image URL]" class="card-img-top" alt="Course Image"/>
-
-                            <!-- Course Details -->
-                            <div class="card-body">
-                                <h5 class="card-title">Course Title 3</h5>
-                                <p class="card-text">Brief description of the course. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="btn btn-primary">Learn More</a>
+            <section class="s_banner overflow-hidden" style="background-color:(0, 0, 0, 0); background-image: url(&quot;/e_courses/static/src/img/banner_img.jpg&quot;); background-size: cover; background-position: 65% 12%;height: 92vh;" data-snippet="s_banner">
+                <div class="container align-items-center d-flex mb-5 mt-lg-5 pt-lg-4 pb-lg-1">
+                    <div class="text-white pt-5">
+                        <h1 class="display-4 mb-0">Unlock Your <span class="text-primary font-weight-bold display-3">Potential</span>💡</h1>
+                        <h3 class="mb-4">Transformative Learning for Professional Growth</h3>
+                        <div class="row mt-1 mb-3">
+                            <div class="col">
+                                <p>Unleash your potential and take the next step in your career journey<br/>Our courses provide the spark you need to propel your career to new heights</p>
+                                <a href="/courses" class="btn btn-primary px-5">Explore courses ☛</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Why Choose Us Section -->
-            <section class="my-5">
-                <h2 class="text-center mb-4">Why Choose E-Courses?</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <h4>Expert Instructors</h4>
-                        <p>Learn from industry experts with real-world experience.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h4>Interactive Learning</h4>
-                        <p>Engage in hands-on activities and interactive lessons.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h4>Flexible Schedule</h4>
-                        <p>Study at your own pace, anytime, anywhere.</p>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Testimonials Section -->
-            <section class="my-5">
-                <h2 class="text-center mb-4">What Our Students Say</h2>
-                <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                    <!-- Carousel Content Goes Here -->
-                </div>
-            </section>
+           <div class="container">
+               <!-- Featured Courses Section -->
+               <!-- Check if courses are not empty -->
+               <t t-if="courses">
+                   <section class="my-5 py-2">
+                       <div class="my-5">
+                           <h2 class="text-center mb-5">📘 Featured Courses</h2>
+                           <div class="row">
+                               <t t-foreach="courses" t-as="course">
+                                   <div class="col-md-4">
+                                       <div class="card">
+                                           <!-- Course Image -->
+                                           <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image"/>
 
-            <!-- Call to Action Section -->
-            <section class="text-center my-5">
-                <h2>Start Your Learning Journey Today!</h2>
-                <p>Explore our courses and unlock a world of knowledge.</p>
-                <a href="#" class="btn btn-primary btn-lg">Get Started</a>
-            </section>
-        </div>
+                                           <!-- Course Details -->
+                                           <div class="card-body">
+                                               <h5 class="card-title"><t t-esc="course.title"/></h5>
+<!--                                               <span><t t-esc="course.level"/></span>-->
+                                               <span class="card-text"><t t-esc="course.description"/></span>
+                                               <a href="/courses/9999" class="btn btn-outline-primary">Learn More</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </t>
+                           </div>
+                           <div class="row mt-5">
+                               <a href="/courses" class="btn btn-primary px-5 mx-auto">Explore more ☛</a>
+                           </div>
+                       </div>
+                   </section>
+               </t>
+
+
+               <!-- Why Choose Us Section -->
+               <section class="my-5 py-2">
+                   <div class="my-5">
+                       <h2 class="text-center mb-5">🔮 Why Choose E-Courses?</h2>
+                       <div class="row">
+                           <div class="col-md-4 text-center">
+                               <img src="./../../e_courses/static/src/img/person.png" style="height=120px" class="mb-3"/>
+                               <h4>Expert Instructors</h4>
+                               <p>Learn from industry experts with real-world experience.</p>
+                           </div>
+                           <div class="col-md-4 text-center">
+                               <img src="./../../e_courses/static/src/img/task.png" style="height=120px" class="mb-3"/>
+                               <h4>Interactive Learning</h4>
+                               <p>Engage in hands-on activities and interactive lessons.</p>
+                           </div>
+                           <div class="col-md-4 text-center">
+                               <img src="./../../e_courses/static/src/img/calendar.png" style="height=120px" class="mb-3"/>
+                               <h4>Flexible Schedule</h4>
+                               <p>Study at your own pace, anytime, anywhere.</p>
+                           </div>
+                       </div>
+                   </div>
+               </section>
+
+               <!-- steps Section -->
+               <section class="my-5 py-2">
+               <div class="row flex-lg-row-reverse align-items-center my-5">
+                   <div class="col px-5">
+                       <h1 class="">📚 Seamless Learning Experience</h1>
+                       <p class="">Discover a diverse range of courses tailored to your interests and career goals. Our user-friendly platform allows you to browse and select courses effortlessly, ensuring you find the perfect fit for your learning journey.</p>
+                       <ul>
+                           <li>
+                               Step 1: Browse and Select ☑️
+                           </li>
+                           <li>
+                               Step 2: Dive into Interactive Learning ☑️
+                           </li>
+                       </ul>
+                   </div>
+                   <div class="col-5 ">
+                       <img src="./../../e_courses/static/src/img/online_edu.jpg" width="450" class="image d-block img-fluid mx-auto"/>
+                   </div>
+               </div>
+               </section>
+
+               <!-- Call to Action Section -->
+               <section class="my-5 py-5" style="background-color: #A3CEF1;">
+                   <div class="text-center my-5 ">
+                       <h2>💡 Start Your Learning Journey Today! 🧠</h2>
+                       <p>Explore our courses and unlock a world of knowledge.</p>
+                       <a href="/courses" class="btn btn-primary btn-lg">Get Started</a>
+                   </div>
+               </section>
+           </div>
+           </div>
 
         <!-- Footer Section -->
-        <footer class="bg-dark text-white py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>2023 E-Courses Platform. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#">Privacy Policy</a>
-                        <span class="mx-2">|</span>
-                        <a href="#">Terms of Service</a>
-                    </div>
-                </div>
+        <footer class="bg-dark text-white mt-5 py-3">
+            <div class="container text-center">
+                <p>
+                    Made with 🤍 by BERHI Othmane, EL KHANTACH Yassine and DARDOURI Chaimae
+                </p>
             </div>
         </footer>
 

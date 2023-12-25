@@ -70,3 +70,11 @@ class WebsiteCourses(http.Controller):
         user_obj = self.pool.get('res.users')
         user_value = user_obj.browse(cr, uid, uid)
         return user_value.login or False
+    def courses_controller(self, query=None, tag=None):
+        if query:
+            courses = request.env['e_courses.course'].search_courses(query)
+        elif tag:
+            courses = request.env['e_courses.course'].filter_courses_by_tags([tag])
+        else:
+            courses = request.env['e_courses.course'].search([])
+        return http.request.render('e_courses.website_homepage', {'courses': courses})
