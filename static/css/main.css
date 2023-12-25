@@ -6,6 +6,12 @@
     background-color: #45223c;
 }
 
+.rating-metric {
+    color: #FF9529 ;
+    font-weight: 700;
+    font-size: 1.1em;
+
+}
 /* Override Bootstrap .btn-success */
 .btn-success {
     color: #fff;

@@ -2,12 +2,23 @@
 <odoo>
     <template id='course_details' name="Odoo Courses Homepage">
         <!-- Header Section -->
+        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
         <header class="bg-primary text-white py-4">
             <div class="container d-flex justify-content-between">
                 <img src="[Your Logo URL]" alt="E-Courses Logo" class="img-fluid" style="max-height: 50px;"/>
                 <div class="float-right">
-                    <a href="#" class="text-white mx-2">Login</a>
-                    <a href="#" class="btn btn-light">Register</a>
+                    <t t-if="user">
+                        <!-- Display user information when authenticated -->
+                        <div class="user-info">
+                            <img t-att-src="'data:image/png;base64,'+user.partner_id.image_128.decode('utf8')" alt="User Avatar" class="rounded-circle img-fluid" height="40" width="40" style="max-height: 50px; max-width: 50px;"/>
+                            <span t-esc="user.name"/>
+                        </div>                        
+                    </t>
+                    <t t-if="not user">
+                        <!-- Display login and register buttons when not authenticated -->
+                        <a href="#" class="text-white mx-2">Login</a>
+                        <a href="#" class="btn btn-light">Register</a>
+                    </t>
                 </div>
             </div>
         </header>
@@ -22,6 +33,7 @@
             <div class="bg-extra-purple py-2">
                 <div class="container">
                     <span class="mb-0 fw-lighter">Courses / <span class="fw-bold" t-esc="course.title" /></span>
+                    <input type="hidden" id="courseId" t-att-value="course.id" />
                 </div>
             </div>
             <div class="container mt-4">
@@ -42,13 +54,16 @@
                             <!-- User Rating System -->
                             <div class="d-flex align-items-center mb-3">
                                 <p class="mr-2 my-0">Rate this course:</p>
-                                <div class="rating-stars">
+                                <span class="rating-metric mr-1"><t t-esc="round(course.get_average_rating(course.id), 1)" /></span>
+                                <div class="rating-stars mr-2">
                                     <i class="fa fa-star" data-rating="1"></i>
                                     <i class="fa fa-star" data-rating="2"></i>
                                     <i class="fa fa-star" data-rating="3"></i>
                                     <i class="fa fa-star" data-rating="4"></i>
                                     <i class="fa fa-star" data-rating="5"></i>
                                 </div>
+                                <p class="my-0">(<t t-esc="course.get_number_of_ratings(course.id)"/> <t t-if="course.get_number_of_ratings(course.id) > 1">ratings</t><t t-else="rating"></t>)</p>
+
                             </div>
                         </div>
 
@@ -104,37 +119,46 @@
                     <!-- Course Details Collapse -->
                     <div class="tab-pane fade show active" id="courseDetails" role="tabpanel" aria-labelledby="courseTab">
                         <div class="p-4">
-                            <h4 class="display-5 mb-3"><i class="fas fa-lightbulb"></i> What You'll Learn</h4>
-                            <ul class="list-group list-group-flush mb-3">
-                                <li class="list-group-item"><i class="fas fa-check"></i> Discover and nurture your unique creative voice</li>
-                                <li class="list-group-item"><i class="fas fa-check"></i> Explore various creative mediums and techniques</li>
-                                <li class="list-group-item"><i class="fas fa-check"></i> Overcome creative blocks and unleash your imagination</li>
-                                <li class="list-group-item"><i class="fas fa-check"></i> Create inspiring projects and express yourself</li>
-                            </ul>
+                            <!-- Add this code to your Odoo QWeb template -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Document</th>
+                                        <th>Duration</th>
+                                        <th>Video URL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="course.lessons" t-as="lesson">
+                                        <tr>
+                                            <!-- Lesson Title -->
+                                            <td><t t-esc="lesson.title"/></td>
 
-                            <!-- Instructor Information -->
-                            <div class="mb-3">
-                                <h4 class="display-5 mb-3"><i class="fas fa-chalkboard-teacher"></i> Instructor: John Doe</h4>
-                                <p class="lead">Renowned Artist and Creative Mentor</p>
-                            </div>
+                                            <!-- Document Link -->
+                                            <td class="text-center">
+                                                <t t-if="lesson.document">
+                                                    <a t-att-href="'data:file/pdf;base64,'+lesson.document.decode('utf-8')">
+                                                        <i class="fa fa-file text-secondary"></i>
+                                                    </a>
+                                                </t>
+                                            </td>
 
-                            <!-- Reviews and Ratings -->
-                            <div class="mb-3">
-                                <h4 class="display-5 mb-3"><i class="fas fa-star"></i> Student Reviews</h4>
-                                <p class="lead">Average Rating: 4.8 (based on 50 reviews)</p>
-                            </div>
+                                            <!-- Duration -->
+                                            <td><t t-esc="lesson.duration"/> hours</td>
 
-                            <!-- Additional Information -->
-                            <div>
-                                <h4 class="display-5 mb-3"><i class="fas fa-info-circle"></i> Course Details</h4>
-                                <dl class="row">
-                                    <dt class="col-sm-3">Duration:</dt>
-                                    <dd class="col-sm-9">12 weeks</dd>
-
-                                    <dt class="col-sm-3">Language:</dt>
-                                    <dd class="col-sm-9">English</dd>
-                                </dl>
-                            </div>
+                                            <!-- Video URL Link -->
+                                            <td class="text-center">
+                                                <t t-if="lesson.video_url">
+                                                    <a t-att-href="lesson.video_url" target="_blank">
+                                                        <i class="fa fa-video text-danger"/>
+                                                    </a>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -147,13 +171,13 @@
                                 <h4><i class="fas fa-chart-bar"></i> Rating Statistics</h4>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p><i class="fas fa-star"></i> 5 Stars: 35%</p>
-                                        <p><i class="fas fa-star"></i> 4 Stars: 20%</p>
-                                        <p><i class="fas fa-star"></i> 3 Stars: 10%</p>
+                                        <p><i class="fas fa-star"></i> 5 Stars: <t t-esc="course.get_rating_percentage(5)"/>%</p>
+                                        <p><i class="fas fa-star"></i> 4 Stars: <t t-esc="course.get_rating_percentage(4)"/>%</p>
+                                        <p><i class="fas fa-star"></i> 3 Stars: <t t-esc="course.get_rating_percentage(3)"/>%</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="fas fa-star"></i> 2 Stars: 5%</p>
-                                        <p><i class="fas fa-star"></i> 1 Star: 5%</p>
+                                        <p><i class="fas fa-star"></i> 2 Stars: <t t-esc="course.get_rating_percentage(2)"/>%</p>
+                                        <p><i class="fas fa-star"></i> 1 Star: <t t-esc="course.get_rating_percentage(1)"/>%</p>
                                     </div>
                                     <div class="col-md-4">
                                         <!-- Add more statistics as needed -->

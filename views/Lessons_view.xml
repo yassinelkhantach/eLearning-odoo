@@ -31,7 +31,8 @@
                                         <field name="video_url" placeholder="Enter the video URL" /> 
                                     </group>
                                     <group>
-                                        <field name="document" widget="binary" placeholder="Upload a document"/>
+                                        <field name="document" widget="binary" filename="document_filename" placeholder="Upload a document"/>
+                                        <field name="document_filename" invisible="1"/>
                                         <field name="duration"/>
                                     </group>
                                     <group>
