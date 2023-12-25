@@ -29,6 +29,7 @@
         'views/Users_view.xml',
         'views/Lessons_view.xml',
         'views/Attachments_view.xml',
+        'views/Rating_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
