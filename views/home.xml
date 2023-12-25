@@ -39,11 +39,15 @@
                            <h2 class="text-center mb-5">📘 Featured Courses</h2>
                            <div class="row">
                                <t t-foreach="courses" t-as="course">
-                                   <div class="col-md-4">
+                                   <div class="my-2 col-md-4">
                                        <div class="card">
                                            <!-- Course Image -->
-                                           <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image"/>
-
+                                           <t t-if="course.photo">
+                                               <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                           </t>
+                                           <t t-if="not course.photo">
+                                               <img src="./../../e_courses/static/src/img/course_default_photo.jpeg"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                           </t>
                                            <!-- Course Details -->
                                            <div class="card-body">
                                                <h5 class="card-title"><t t-esc="course.title"/></h5>
