@@ -25,3 +25,5 @@ class Course(models.Model):
         course = super(Course, self).create(values)
         return course
     
+    def get_instructor_names(self):
+        return ', '.join(self.instructor_ids.mapped('name'))

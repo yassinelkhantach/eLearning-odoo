@@ -1,0 +1,54 @@
+.bg-purple {
+    background-color: #714B67;
+}
+
+.bg-extra-purple {
+    background-color: #45223c;
+}
+
+/* Override Bootstrap .btn-success */
+.btn-success {
+    color: #fff;
+    background-color: #017E84; /* Use the desired color */
+    border-color: #017E84; /* Use the desired color */
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #015367; /* Use the desired hover color */
+    border-color: #015367; /* Use the desired hover color */
+}
+
+.btn-success.focus, .btn-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(1, 126, 132, 0.5); /* Use the desired focus box-shadow */
+}
+
+.btn-success.disabled, .btn-success:disabled {
+    color: #fff;
+    background-color: #017E84; /* Use the desired color for disabled state */
+    border-color: #017E84; /* Use the desired color for disabled state */
+}
+
+.btn-success:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #015367; /* Use the desired active state color */
+    border-color: #015367; /* Use the desired active state color */
+}
+
+.btn-success:not(:disabled):not(.disabled):active:focus,
+.btn-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(1, 126, 132, 0.5); /* Use the desired active state focus box-shadow */
+}
+
+.card {
+    border-top: none;
+}
+
+.nav-pills .nav-item .nav-link.active {
+    color: black !important;
+    background-color: white !important;
+    border-radius: 0 !important;
+}

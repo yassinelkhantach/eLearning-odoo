@@ -10,4 +10,7 @@ class WebsiteCourses(http.Controller):
     
     @http.route('/course/details', type='http', auth='public', website=True)
     def courseDetails(self, **kwargs):
-        return http.request.render('e_courses.course_details', {})
+        first_course = request.env['e_courses.course'].sudo().search([], limit=1)
+        return http.request.render('e_courses.course_details', {'course':first_course})
+    
+ 
