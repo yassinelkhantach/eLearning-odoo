@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="rating_list_action">
+        <field name="name">Learning Overview</field>
+        <field name="res_model">e_courses.rating</field>
+        <field name="view_mode">kanban,tree,graph,form,search</field>
+        <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Rating</p>
+        </field>
+    </record>
+
+    <!-- top-level menu: no parent -->
+    <menuitem id="elearning_menu" name="E-Courses"/>
+    <menuitem id="rating_menu" name="Rating" parent="elearning_menu"
+              action="rating_list_action"/>
+
+    <record id="rating_form_view" model="ir.ui.view">
+        <field name="name">Rating Form</field>
+        <field name="model">e_courses.rating</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-8">
+                                    <group>
+                                        <field name="course_id"/>
+                                        <field name="user_id"/>
+                                        <field name="value"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+<record id="rating_kanban_view" model="ir.ui.view">
+    <field name="name">Rating Kanban</field>
+    <field name="model">e_courses.rating</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <field name="value"/>
+            <field name="course_id" options="{'no_create_edit': True}" placeholder="Course"/>
+            <field name="user_id" options="{'no_create_edit': True}" placeholder="User"/>
+
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_left">
+                        <div class="oe_kanban_content">
+                            <div class="oe_kanban_details">
+                                <div class="oe_kanban_record_content">
+                                    <field name="value" class="oe_kanban_value"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <div>
+                                        <field name="course_id" options="{'no_create_edit': True}" placeholder="Course"/>
+                                    </div>
+                                    <div>
+                                        <field name="user_id" options="{'no_create_edit': True}" placeholder="User"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+</odoo>

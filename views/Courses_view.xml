@@ -34,10 +34,13 @@
                                     <field name="title" placeholder="Enter the course title" class="o_field_char o_field_widget o_input o_required_modifier" />
                                 </group>
                                 <notebook>
-                                    <page string="Tags and Description" name="tags_description_page">
+                                    <page string="General Information" name="general_info_page">
                                         <group>
                                             <field name="tags" widget="many2many_tags" class="o_field_many2manytags o_input o_field_widget"/>
                                             <field name="description"/>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                            <field name="enrollment_deadline"/>
                                         </group>
                                     </page>
                                     <page string="Price and Duration" name="price_duration_page">
@@ -49,6 +52,7 @@
                                     <page string="Instructor" name="instructor_page">
                                         <group>
                                             <field name="instructor_ids" widget="many2many_tags"/>
+                                            <field name="created_at" readonly="1"/>
                                         </group>
                                     </page>
                                 </notebook>
@@ -88,6 +92,14 @@
                                         <i class="fa fa-money mr-1" style="color: #27ae60;"></i>
                                         <field name="price" options="{'no_create_edit': True}"/>
                                     </div>
+                                    <div t-if="record.enrollment_deadline" t-attf-style="color: {record.enrollment_deadline &lt; fields.Datetime.now() ? '#e74c3c' : '#2ecc71'};">
+                                        <i class="fa fa-calendar mr-1" style="color: #e74c3c;"></i>
+                                        <field name="enrollment_deadline" options="{'no_create_edit': True}"/>
+                                    </div>
+                                     <div>
+                                        <i class="fa fa-star mr-1" style="color: #f39c12;"></i>
+                                        <field name="average_rating" options="{'no_create_edit': True}" widget="statinfo"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +118,10 @@
             <field name="photo" widget="image" options="{'size': (50, 50)}" class="oe_avatar" />
             <field name="title" string="Course Title" class="oe_title" />
             <field name="tags" widget="many2many_tags" class="oe_tags" />
+            <field name="start_date" string="Start Date" />
+            <field name="end_date" string="End Date" />
+            <field name="instructor_ids" widget="many2many_tags" class="oe_instructors" />
+            <field name="created_at" string="Created At" />
             <field name="price" string="Course Price" class="oe_price" />
             <field name="duration_hours" string="Duration" class="oe_duration" />
         </tree>
@@ -121,6 +137,9 @@
             <field name="description"/>
             <field name="tags"/>
             <field name="duration_hours"/>
+            <field name="instructor_ids"/>
+            <field name="enrollment_deadline"/>
+            <field name="price"/>
         </search>
     </field>
 </record>

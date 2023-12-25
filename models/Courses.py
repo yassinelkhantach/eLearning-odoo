@@ -16,6 +16,16 @@ class Course(models.Model):
     created_at = fields.Datetime(string='Created At', default=fields.Datetime.now)
     tags = fields.Many2many('e_courses.course.tag', string='Tags')
     
+    ratings = fields.One2many('e_courses.rating', 'course_id', string='Ratings')
+
+    average_rating = fields.Float(string='Average Rating', compute='compute_average_rating', store=True)
+
+    @api.depends('ratings', 'ratings.value')
+    def compute_average_rating(self):
+        for course in self:
+            ratings = course.ratings.mapped('value')
+            course.average_rating = sum(ratings) / len(ratings) if ratings else 0.0
+    
     def name_get(self):
         res = super(Course, self).name_get()
         return [(course.id, course.title) for course in self]

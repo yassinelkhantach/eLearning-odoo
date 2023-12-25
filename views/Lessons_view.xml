@@ -27,15 +27,14 @@
                                 <div class="col-md-8">
                                     <group>
                                         <field name="title" placeholder="Enter the lesson title" class="o_field_char o_field_widget o_input o_required_modifier" />
-                                        <field name="objective"/>
-                                        <field name="video_url" placeholder="Enter the video URL" /> 
                                     </group>
                                     <group>
-                                        <field name="document" widget="binary" placeholder="Upload a document"/>
+                                        <field name="video_url" placeholder="Enter the video URL" /> 
                                         <field name="duration"/>
                                     </group>
                                     <group>
                                         <field name="course_id" widget="many2one" placeholder="Select a Course"/>
+                                        <field name="objective"/>
                                     </group>
                                 </div>
                             </div>
