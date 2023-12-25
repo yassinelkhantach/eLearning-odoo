@@ -7,3 +7,7 @@ class WebsiteCourses(http.Controller):
     def courses(self, **kwargs):
         courses = request.env['e_courses.course'].search([])
         return http.request.render('e_courses.website_homepage', {"courses": courses})
+    
+    @http.route('/course/details', type='http', auth='public', website=True)
+    def courseDetails(self, **kwargs):
+        return http.request.render('e_courses.course_details', {})

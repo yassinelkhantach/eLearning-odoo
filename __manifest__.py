@@ -30,6 +30,7 @@
         'views/Lessons_view.xml',
         'views/Attachments_view.xml',
         'views/home.xml',
+        'views/course_details.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -40,6 +41,7 @@
                             'https://code.jquery.com/jquery-3.5.1.slim.min.js',
                             'https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js',
                             'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
+                            '/e_courses/static/lib/pdfslidesviewer/PDFSlidesViewer.js'
             ]
         }
 }
