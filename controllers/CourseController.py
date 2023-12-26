@@ -7,8 +7,14 @@ class WebsiteCourses(http.Controller):
 
     @http.route('/courses', type='http', auth='public', website=True)
     def courses(self, **kwargs):
-        courses = request.env['e_courses.course'].search([])
-        return http.request.render('e_courses.website_homepage', {"courses": courses})
+        if query:
+            courses = request.env['e_courses.course'].search_courses(query)
+        elif tag:
+            courses = request.env['e_courses.course'].filter_courses_by_tags([tag])
+        else:
+            courses = request.env['e_courses.course'].search([])
+        tags= request.env['e_courses.course.tag'].search([])
+        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
     
     @http.route('/course/<int:course_id>/details', type='http', auth='user', website=True)
     def courseDetails(self, course_id, **kwargs):
@@ -70,17 +76,7 @@ class WebsiteCourses(http.Controller):
         user_obj = self.pool.get('res.users')
         user_value = user_obj.browse(cr, uid, uid)
         return user_value.login or False
-    
-    def courses_controller(self, query=None, tag=None):
-        if query:
-            courses = request.env['e_courses.course'].search_courses(query)
-        elif tag:
-            courses = request.env['e_courses.course'].filter_courses_by_tags([tag])
-        else:
-            courses = request.env['e_courses.course'].search([])
-        tags= request.env['e_courses.course.tag'].search([])
-        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
-    
+
     @http.route('/course/<int:course_id>/enroll', type='http', auth='user', website=True, csrf=False)
     def enroll_course(self, course_id, **kwargs):
         # Get the current user
