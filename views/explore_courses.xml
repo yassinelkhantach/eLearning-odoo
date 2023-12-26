@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id='website_homepage' name="Odoo Courses Homepage">
+    <template id='website_explore_courses' name="Odoo Explore Courses">
         <!-- Header Section -->
         <header class="bg-primary text-white py-3">
             <div class="container d-flex justify-content-between">
@@ -14,32 +14,69 @@
             <!-- Include Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
-            <section class="s_banner overflow-hidden" style="background-color:(0, 0, 0, 0); background-image: url(&quot;/e_courses/static/src/img/banner_img.jpg&quot;); background-size: cover; background-position: 65% 12%;height: 92vh;" data-snippet="s_banner">
+
+            <section class="s_banner overflow-hidden" style="background-color:#7FA2CC; background-size: cover; background-position: 65% 12%;height: 40vh;" data-snippet="s_banner">
                 <div class="container align-items-center d-flex mb-5 mt-lg-5 pt-lg-4 pb-lg-1">
-                    <div class="text-white pt-5">
-                        <h1 class="display-4 mb-0">Unlock Your <span class="text-primary font-weight-bold display-3">Potential</span>💡</h1>
-                        <h3 class="mb-4">Transformative Learning for Professional Growth</h3>
+                    <div class="text-white">
+                        <h1 class="display-4 mb-0">Navigate Your Learning Horizon </h1>
                         <div class="row mt-1 mb-3">
                             <div class="col">
-                                <p>Unleash your potential and take the next step in your career journey<br/>Our courses provide the spark you need to propel your career to new heights</p>
-                                <a href="/courses" class="btn btn-primary px-5">Explore courses ☛</a>
+                                <p>
+                                    Delve into a collection of courses thoughtfully curated to meet the demands of the ever-evolving professional
+                                    landscape.<br/>Empower yourself by selecting from a range of subjects that align with your ambitions.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
            <div class="container">
-               <!-- Featured Courses Section -->
-               <!-- Check if courses are not empty -->
+               <!-- all Courses Section -->
+               <div class="row mt-5 d-flex justify-content-between align-items-center">
+                   <div class="col">
+                       <t t-if="courses">
+                           <h4>📚 All Courses(<span><t t-esc="len(courses)"/></span>)</h4>
+                       </t>
+                       <t t-if="not courses">
+                           <h4>📚 All Courses(<span>0</span>)</h4>
+                       </t>
+                   </div>
+                   <div class="col-4">
+                       <form t-att-action="'/courses'" method="get" class="mb-0">
+                           <div class="input-group">
+                               <input type="search" name="query" placeholder="What're you searching for?" aria-describedby="button-addon5" class="form-control"/>
+                               <div class="input-group-append">
+                                   <button id="button-addon5" type="submit" class="btn btn-primary">🔎</button>
+                               </div>
+                           </div>
+                       </form>
+                   </div>
+               </div>
                <t t-if="courses">
-                   <section class="my-5 py-2">
-                       <div class="my-5">
-                           <h2 class="text-center mb-5">📘 Featured Courses</h2>
-                           <div class="row">
+                   <section class="py-2">
+                       <div class="">
+                           <div class="d-flex justify-content-start align-items-center">
+                               <div class="">
+                                    <h6 class="mb-0">🌪️ Tags:</h6>
+                               </div>
+                               <div class="d-flex align-items-center mx-2">
+                                   <form t-att-action="'/courses'" method="get" class="mb-0">
+                                       <input type="hidden" name="tag" value=""/>
+                                       <button class="btn btn-outline-dark btn-sm mx-1  rounded-pill px-3">All</button>
+                                   </form>
+                                   <t t-foreach="tags" t-as="tag">
+                                       <form t-att-action="'/courses'" method="get" class="mb-0">
+                                           <input type="hidden" name="tag" t-att-value="tag.name"/>
+                                           <button class="btn btn-outline-dark btn-sm mx-1  rounded-pill px-3"><t t-esc="tag.name"/></button>
+                                       </form>
+                                   </t>
+                               </div>
+
+                           </div>
+                           <div class="row my-2">
                                <t t-foreach="courses" t-as="course">
-                                   <div class="my-2 col-md-4">
+                                   <div class="my-3 col-md-4">
                                        <div class="card">
                                            <!-- Course Image -->
                                            <t t-if="course.photo">
@@ -75,69 +112,21 @@
                                    </div>
                                </t>
                            </div>
-                           <div class="row mt-5">
-                               <a href="/courses" class="btn btn-primary px-5 mx-auto">Explore more ☛</a>
-                           </div>
                        </div>
                    </section>
                </t>
-
-
-               <!-- Why Choose Us Section -->
-               <section class="my-5 py-2">
+               <t t-if="not courses">
                    <div class="my-5">
-                       <h2 class="text-center mb-5">🔮 Why Choose E-Courses?</h2>
                        <div class="row">
-                           <div class="col-md-4 text-center">
-                               <img src="./../../e_courses/static/src/img/person.png" style="height=120px" class="mb-3"/>
-                               <h4>Expert Instructors</h4>
-                               <p>Learn from industry experts with real-world experience.</p>
-                           </div>
-                           <div class="col-md-4 text-center">
-                               <img src="./../../e_courses/static/src/img/task.png" style="height=120px" class="mb-3"/>
-                               <h4>Interactive Learning</h4>
-                               <p>Engage in hands-on activities and interactive lessons.</p>
-                           </div>
-                           <div class="col-md-4 text-center">
-                               <img src="./../../e_courses/static/src/img/calendar.png" style="height=120px" class="mb-3"/>
-                               <h4>Flexible Schedule</h4>
-                               <p>Study at your own pace, anytime, anywhere.</p>
+                           <div class="col-md-6 mx-auto text-center">
+                               <img src="./../../e_courses/static/src/img/empty.png" alt="No Courses Found" class="img-fluid" width="250px"/>
+                               <p class="mt-3">Ops! No Courses were found.</p>
                            </div>
                        </div>
                    </div>
-               </section>
-
-               <!-- steps Section -->
-               <section class="my-5 py-2">
-               <div class="row flex-lg-row-reverse align-items-center my-5">
-                   <div class="col px-5">
-                       <h1 class="">📚 Seamless Learning Experience</h1>
-                       <p class="">Discover a diverse range of courses tailored to your interests and career goals. Our user-friendly platform allows you to browse and select courses effortlessly, ensuring you find the perfect fit for your learning journey.</p>
-                       <ul>
-                           <li>
-                               Step 1: Browse and Select ☑️
-                           </li>
-                           <li>
-                               Step 2: Dive into Interactive Learning ☑️
-                           </li>
-                       </ul>
-                   </div>
-                   <div class="col-5 ">
-                       <img src="./../../e_courses/static/src/img/online_edu.jpg" width="450" class="image d-block img-fluid mx-auto"/>
-                   </div>
-               </div>
-               </section>
-
-               <!-- Call to Action Section -->
-               <section class="my-5 py-5" style="background-color: #A3CEF1;">
-                   <div class="text-center my-5 ">
-                       <h2>💡 Start Your Learning Journey Today! 🧠</h2>
-                       <p>Explore our courses and unlock a world of knowledge.</p>
-                       <a href="/courses" class="btn btn-primary btn-lg">Get Started</a>
-                   </div>
-               </section>
+               </t>
            </div>
-           </div>
+        </div>
 
         <!-- Footer Section -->
         <footer class="bg-dark text-white mt-5 py-3">
