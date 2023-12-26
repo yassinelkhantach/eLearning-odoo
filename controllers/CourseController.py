@@ -5,6 +5,12 @@ import json
 
 class WebsiteCourses(http.Controller):
 
+    @http.route('/', type='http', auth='public', website=True)
+    def render_homepage(self, **kw):
+        courses = request.env['e_courses.course'].search([])
+        return http.request.render('e_courses.website_homepage', {"courses": courses})
+    
+    
     @http.route('/courses', type='http', auth='public', website=True)
     def courses_controller(self, query=None, tag=None):
         if query:
