@@ -106,7 +106,7 @@
                                                </div>
                                            </div>
                                            <div class="card-footer d-flex align-items-center justify-content-end">
-                                               <a t-att-href="'/courses/'+str(course.id)" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                               <a t-att-href="/course/#{course.id}/details" class="btn btn-outline-primary btn-sm">Learn More</a>
                                            </div>
                                        </div>
                                    </div>
