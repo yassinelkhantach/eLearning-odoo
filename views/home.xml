@@ -51,9 +51,25 @@
                                            <!-- Course Details -->
                                            <div class="card-body">
                                                <h5 class="card-title"><t t-esc="course.title"/></h5>
-<!--                                               <span><t t-esc="course.level"/></span>-->
+                                               <div class="mb-2">
+                                                   <t t-if="course.tags">
+                                                       <t t-foreach="course.tags" t-as="tag">
+                                                           <span class="badge badge-info ms-1"><t t-esc="tag.name"/></span>
+                                                       </t>
+                                                   </t>
+                                               </div>
+                                               <div>
+
+                                               </div>
                                                <span class="card-text"><t t-esc="course.description"/></span>
-                                               <a href="/courses/9999" class="btn btn-outline-primary">Learn More</a>
+                                               <div class="mt-2 d-flex justify-content-around align-items-center">
+                                                   <span class="card-text mx-1">💵<t t-esc="course.price"/>$</span>
+                                                   <span class="card-text mx-1">🕥<t t-esc="course.duration_hours"/> Hours</span>
+                                                   <span class="card-text mx-1">⭐<t t-esc="course.average_rating"/> rating</span>
+                                               </div>
+                                           </div>
+                                           <div class="card-footer d-flex align-items-center justify-content-end">
+                                               <a t-att-href="'/courses/'+str(course.id)" class="btn btn-outline-primary btn-sm">Learn More</a>
                                            </div>
                                        </div>
                                    </div>
