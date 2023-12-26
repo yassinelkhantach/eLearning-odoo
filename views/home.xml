@@ -62,7 +62,6 @@
 
                                                </div>
                                                <span class="card-text"><t t-esc="course.description"/></span>
-                                               <a t-attf-href="/course/#{course.id}/details" class="btn btn-outline-primary">Learn More</a>
                                                <div class="mt-2 d-flex justify-content-around align-items-center">
                                                    <span class="card-text mx-1">💵<t t-esc="course.price"/>$</span>
                                                    <span class="card-text mx-1">🕥<t t-esc="course.duration_hours"/> Hours</span>
@@ -70,7 +69,7 @@
                                                </div>
                                            </div>
                                            <div class="card-footer d-flex align-items-center justify-content-end">
-                                               <a t-att-href="'/courses/'+str(course.id)" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                               <a t-attf-href="/course/#{course.id}/details" class="btn btn-outline-primary btn-sm">Learn More</a>
                                            </div>
                                        </div>
                                    </div>

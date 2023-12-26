@@ -78,6 +78,8 @@ class WebsiteCourses(http.Controller):
             courses = request.env['e_courses.course'].filter_courses_by_tags([tag])
         else:
             courses = request.env['e_courses.course'].search([])
+        tags= request.env['e_courses.course.tag'].search([])
+        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
     
     @http.route('/course/<int:course_id>/enroll', type='http', auth='user', website=True, csrf=False)
     def enroll_course(self, course_id, **kwargs):
@@ -131,6 +133,3 @@ class WebsiteCourses(http.Controller):
             # Handle any exceptions
             error_response = {'error': str(e)}
             return Response(json.dumps(error_response), content_type='application/json')
-
-        tags= request.env['e_courses.course.tag'].search([])
-        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
