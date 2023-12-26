@@ -1,0 +1,83 @@
+.bg-purple {
+    background-color: #6096BA;
+}
+
+.bg-extra-purple {
+    background-color: #447199;
+}
+
+.bg-header-primary {
+    background-color: #274C77;
+}
+
+.text-blue {
+    color: #6096BA;
+}
+
+.text-extra-blue {
+    color: #274C77;
+}
+
+.text-white-bold {
+    color: #fff;
+    font-weight: 700 !important;
+}
+
+
+.rating-metric {
+    color: #FF9529 ;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.bg-extra-purple a {
+    text-decoration: none;
+    color: #fff; /* Set your desired default color */
+}
+
+/* Override Bootstrap .btn-success */
+.btn-success {
+    color: #fff;
+    background-color: #017E84; /* Use the desired color */
+    border-color: #017E84; /* Use the desired color */
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #015367; /* Use the desired hover color */
+    border-color: #015367; /* Use the desired hover color */
+}
+
+.btn-success.focus, .btn-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(1, 126, 132, 0.5); /* Use the desired focus box-shadow */
+}
+
+.btn-success.disabled, .btn-success:disabled {
+    color: #fff;
+    background-color: #017E84; /* Use the desired color for disabled state */
+    border-color: #017E84; /* Use the desired color for disabled state */
+}
+
+.btn-success:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #015367; /* Use the desired active state color */
+    border-color: #015367; /* Use the desired active state color */
+}
+
+.btn-success:not(:disabled):not(.disabled):active:focus,
+.btn-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(1, 126, 132, 0.5); /* Use the desired active state focus box-shadow */
+}
+
+.card {
+    border-top: none;
+}
+
+.nav-pills .nav-item .nav-link.active {
+    color: black !important;
+    background-color: white !important;
+    border-radius: 0 !important;
+}

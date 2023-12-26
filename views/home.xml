@@ -39,17 +39,37 @@
                            <h2 class="text-center mb-5">📘 Featured Courses</h2>
                            <div class="row">
                                <t t-foreach="courses" t-as="course">
-                                   <div class="col-md-4">
+                                   <div class="my-2 col-md-4">
                                        <div class="card">
                                            <!-- Course Image -->
-                                           <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image"/>
-
+                                           <t t-if="course.photo">
+                                               <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                           </t>
+                                           <t t-if="not course.photo">
+                                               <img src="./../../e_courses/static/src/img/course_default_photo.jpeg"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                           </t>
                                            <!-- Course Details -->
                                            <div class="card-body">
                                                <h5 class="card-title"><t t-esc="course.title"/></h5>
-<!--                                               <span><t t-esc="course.level"/></span>-->
+                                               <div class="mb-2">
+                                                   <t t-if="course.tags">
+                                                       <t t-foreach="course.tags" t-as="tag">
+                                                           <span class="badge badge-info ms-1"><t t-esc="tag.name"/></span>
+                                                       </t>
+                                                   </t>
+                                               </div>
+                                               <div>
+
+                                               </div>
                                                <span class="card-text"><t t-esc="course.description"/></span>
-                                               <a href="/courses/9999" class="btn btn-outline-primary">Learn More</a>
+                                               <div class="mt-2 d-flex justify-content-around align-items-center">
+                                                   <span class="card-text mx-1">💵<t t-esc="course.price"/>$</span>
+                                                   <span class="card-text mx-1">🕥<t t-esc="course.duration_hours"/> Hours</span>
+                                                   <span class="card-text mx-1">⭐<t t-esc="course.average_rating"/> rating</span>
+                                               </div>
+                                           </div>
+                                           <div class="card-footer d-flex align-items-center justify-content-end">
+                                               <a t-attf-href="/course/#{course.id}/details" class="btn btn-outline-primary btn-sm">Learn More</a>
                                            </div>
                                        </div>
                                    </div>

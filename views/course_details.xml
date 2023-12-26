@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id='course_details' name="Odoo Courses Homepage">
+        <!-- Header Section -->
+        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+        <header class="bg-header-primary text-white py-3">
+            <div class="container d-flex justify-content-between">
+                <img src="./../../e_courses/static/src/img/logo_white.png" alt="E-Courses" class="img-fluid" style="max-height: 50px;"/>
+                <div class="float-right">
+                    <t t-if="user">
+                        <!-- Display user information when authenticated -->
+                        <div class="user-info">
+                          <!-- <img t-att-src="'data:image/png;base64,'+user.partner_id.image_128.decode('utf8')" alt="User Avatar" class="rounded-circle img-fluid" height="40" width="40" style="max-height: 50px; max-width: 50px;"/>--> 
+                            <span t-esc="user.name"/>
+                        </div>                        
+                    </t>
+                    <t t-if="not user">
+                        <!-- Display login and register buttons when not authenticated -->
+                        <a href="/web/login" class="text-white mx-2">Login</a>
+                    </t>
+                </div>
+            </div>
+        </header>
+       
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./../../e_courses/static/css/main.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+
+        <!-- Course Details Section -->
+        <div class="bg-purple text-white">
+            <div class="bg-extra-purple py-2">
+                <div class="container">
+                    <span class="mb-0 fw-lighter">
+                        <a t-attf-href="/courses">Courses</a> / 
+                        <a t-attf-href="/course/#{course.id}/details">
+                            <span class="text-blue-bold" t-esc="course.title" />
+                        </a> 
+                    </span>
+                    <input type="hidden" id="courseId" t-att-value="course.id" />
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <!-- Left Column: Image -->
+                    <div class="col-lg-4 d-flex flex-end pt-4">
+                        <!-- Course Thumbnail -->
+                        <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  alt="Course Thumbnail" class="img-fluid mb-0 shadow w-100"/>
+                    </div>
+
+                    <!-- Right Column: Title, Slogan, Rating -->
+                    <div class="col-lg-8">
+                        <div class="py-4">
+                            <!-- Course Title and Slogan -->
+                            <h1 class="display-4" t-esc="course.title" />
+                            <p class="lead" t-esc="course.description" />
+
+                            <!-- User Rating System -->
+                            <div class="d-flex align-items-center mb-3">
+                                <p class="mr-2 my-0">Rate this course:</p>
+                                <span class="rating-metric mr-1"><t t-esc="round(course.get_average_rating(course.id), 1)" /></span>
+                                <div class="rating-stars mr-2">
+                                    <i class="fa fa-star" data-rating="1"></i>
+                                    <i class="fa fa-star" data-rating="2"></i>
+                                    <i class="fa fa-star" data-rating="3"></i>
+                                    <i class="fa fa-star" data-rating="4"></i>
+                                    <i class="fa fa-star" data-rating="5"></i>
+                                </div>
+                                <p class="my-0">
+                                    (<t t-esc="course.get_number_of_ratings(course.id)" /> ratings)
+                                </p>
+
+                            </div>
+                        </div>
+
+                                    
+                        <div class="text-white mb-0">
+                            <ul class="nav nav-pills" id="coursePills" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="coursePill" data-toggle="pill" href="#courseDetails" role="tab" aria-controls="courseDetails" aria-selected="true" style="color: white; margin-bottom: 0;">
+                                        <i class="fa fa-home"></i> Course
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="reviewPill" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false" style="color: white; margin-bottom: 0;">
+                                        Reviews
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enroll Button and Other Details -->
+        <div class="container">               
+            <!-- Other Details -->
+            <div class="row mb-4">
+                <!-- Enroll Button -->
+                <div class="col-lg-4">
+                    <div class="card shadow rounded-0">
+                        <div class="card-body">
+                            <div id="buttonContainer">
+                                <button type="button" id="enrollButton" class="btn btn-success btn-block mb-3">Enroll Now</button>
+                            </div>
+            
+                            <!-- Enrollment Information -->
+                            <div class="enrollment-info">
+                                <p class="mt-4"><strong>Course instructor:</strong> <span t-esc="course.get_instructor_names()" /></p>
+                                <p><strong>Start Date:</strong> <span t-esc="course.start_date"/></p>
+                                <p><strong>Enrollment Deadline:</strong>  <span t-esc="course.enrollment_deadline"/></p>
+                                <p><strong>Members:</strong> <t t-esc="int(course.get_number_of_enrollments(course.id))"/></p>
+                                <p><strong>Tags:</strong>
+                                    <t t-foreach="course.tags" t-as="tag">
+                                        <span class="badge badge-info"><t t-esc="tag.name"/></span>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="col-lg-8 tab-content"  id="courseTabsContent">
+                    <!-- Course Details Collapse -->
+                    <div class="tab-pane fade show active" id="courseDetails" role="tabpanel" aria-labelledby="courseTab">
+                        <div class="table-responsive py-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="align-middle">Title</th>
+                                        <th class="align-middle">Duration</th>
+                                        <th class="align-middle">Videos</th>
+                                        <th class="align-middle">Attachments</th> <!-- New column for Documents -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="course.lessons" t-as="lesson">
+                                        <tr>
+                                            <!-- Lesson Title -->
+                                            <td class="align-middle"><t t-esc="lesson.title"/></td>
+                                            <!-- Duration -->
+                                            <td class="align-middle"><t t-esc="lesson.duration"/> hours</td>
+                                            <!-- Video URL Link -->
+                                            <td class="text-center align-middle">
+                                                <t t-if="lesson.video_url">
+                                                    <a t-att-href="lesson.video_url" target="_blank">
+                                                        <i class="fa fa-video text-danger"/>
+                                                    </a>
+                                                </t>
+                                            </td>
+                                            <!-- Documents Dropdown -->
+                                            <td class="text-center align-middle">
+                                                <div class="dropdown">
+                                                    <!-- Dropdown Button -->
+                                                    <a class="text-extra-blue" href="#" role="button" id="documentsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-list"></i>
+                                                    </a>
+                                                    <!-- Dropdown Menu -->
+                                                    <div class="dropdown-menu" aria-labelledby="documentsDropdown">
+                                                        <!-- Loop through attachments and add them as dropdown items -->
+                                                        <t t-foreach="lesson.attachments" t-as="attachment">
+                                                            <a class="dropdown-item" href="#">
+                                                                <i class="fa fa-paperclip text-blue mr-2"></i> 
+                                                                <span>Document</span>
+                                                            </a>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                    <!-- Reviews Collapse -->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviewPill">
+                        <div class="p-4">
+                            <!-- Rating Statistics -->
+                            <div class="mb-4">
+                                <h4><i class="fas fa-chart-bar"></i> Rating Statistics</h4>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><i class="fas fa-star"></i><strong>5 Stars:</strong> <t t-esc="course.get_rating_percentage(5)"/>%</p>
+                                        <p><i class="fas fa-star"></i><strong>4 Stars:</strong> <t t-esc="course.get_rating_percentage(4)"/>%</p>
+                                        <p><i class="fas fa-star"></i><strong>3 Stars:</strong> <t t-esc="course.get_rating_percentage(3)"/>%</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><i class="fas fa-star"></i><strong>2 Stars:</strong> <t t-esc="course.get_rating_percentage(2)"/>%</p>
+                                        <p><i class="fas fa-star"></i><strong>1 Star:</strong> <t t-esc="course.get_rating_percentage(1)"/>%</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!-- Add more statistics as needed -->
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Comments Section -->
+                            <div>
+                                <h4><i class="fas fa-comments"></i> Student Comments</h4>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <strong>John Doe:</strong> "This course exceeded my expectations!"
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Jane Smith:</strong> "Great content, but could use more interactive quizzes."
+                                    </li>
+                                    <!-- Add more comments as needed -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="bg-dark text-white mt-5 py-3">
+            <div class="container text-center">
+                <p>
+                    Made with 🤍 by BERHI Othmane, EL KHANTACH Yassine and DARDOURI Chaimae
+                </p>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./../../e_courses/static/js/main.js"></script>
+        
+    </template>
+</odoo>

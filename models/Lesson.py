@@ -10,7 +10,8 @@ class Lesson(models.Model):
     duration = fields.Float(string='Duration (hours)')
 
     course_id = fields.Many2one('e_courses.course', string='Course', required=True)
-
+    attachments = fields.One2many('e_courses.attachment','lesson_id', string='Attachments')
+    
     def name_get(self):
         res = super(Lesson, self).name_get()
         return [(lesson.id, lesson.title) for lesson in self]
@@ -19,3 +20,4 @@ class Lesson(models.Model):
     def create(self, values):
         lesson = super(Lesson, self).create(values)
         return lesson
+    
