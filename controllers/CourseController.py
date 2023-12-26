@@ -11,4 +11,6 @@ class WebsiteCourses(http.Controller):
             courses = request.env['e_courses.course'].filter_courses_by_tags([tag])
         else:
             courses = request.env['e_courses.course'].search([])
-        return http.request.render('e_courses.website_homepage', {'courses': courses})
+
+        tags= request.env['e_courses.course.tag'].search([])
+        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
