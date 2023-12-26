@@ -6,7 +6,7 @@ import json
 class WebsiteCourses(http.Controller):
 
     @http.route('/courses', type='http', auth='public', website=True)
-    def courses(self, **kwargs):
+    def courses_controller(self, query=None, tag=None):
         if query:
             courses = request.env['e_courses.course'].search_courses(query)
         elif tag:
