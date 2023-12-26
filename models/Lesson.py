@@ -10,7 +10,7 @@ class Lesson(models.Model):
     duration = fields.Float(string='Duration (hours)')
 
     course_id = fields.Many2one('e_courses.course', string='Course', required=True)
-    document_filename = fields.Char(string='Document Filename')
+    attachments = fields.One2many('e_courses.attachment','lesson_id', string='Attachments')
     
     def name_get(self):
         res = super(Lesson, self).name_get()

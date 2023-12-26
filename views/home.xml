@@ -49,7 +49,7 @@
                                                <h5 class="card-title"><t t-esc="course.title"/></h5>
 <!--                                               <span><t t-esc="course.level"/></span>-->
                                                <span class="card-text"><t t-esc="course.description"/></span>
-                                               <a href="/courses/9999" class="btn btn-outline-primary">Learn More</a>
+                                               <a t-attf-href="/course/#{course.id}/details" class="btn btn-outline-primary">Learn More</a>
                                            </div>
                                        </div>
                                    </div>

@@ -1,17 +1,40 @@
 .bg-purple {
-    background-color: #714B67;
+    background-color: #6096BA;
 }
 
 .bg-extra-purple {
-    background-color: #45223c;
+    background-color: #447199;
 }
+
+.bg-header-primary {
+    background-color: #274C77;
+}
+
+.text-blue {
+    color: #6096BA;
+}
+
+.text-extra-blue {
+    color: #274C77;
+}
+
+.text-white-bold {
+    color: #fff;
+    font-weight: 700 !important;
+}
+
 
 .rating-metric {
     color: #FF9529 ;
     font-weight: 700;
     font-size: 1.1em;
-
 }
+
+.bg-extra-purple a {
+    text-decoration: none;
+    color: #fff; /* Set your desired default color */
+}
+
 /* Override Bootstrap .btn-success */
 .btn-success {
     color: #fff;

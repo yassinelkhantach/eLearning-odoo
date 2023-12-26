@@ -10,12 +10,12 @@ class WebsiteCourses(http.Controller):
         courses = request.env['e_courses.course'].search([])
         return http.request.render('e_courses.website_homepage', {"courses": courses})
     
-    @http.route('/course/details', type='http', auth='user', website=True)
-    def courseDetails(self, **kwargs):
-        user =  request.env.user
-        first_course = request.env['e_courses.course'].sudo().search([], limit=1)
-        return http.request.render('e_courses.course_details', {'course':first_course,'user':user})
-    
+    @http.route('/course/<int:course_id>/details', type='http', auth='user', website=True)
+    def courseDetails(self, course_id, **kwargs):
+        user = request.env.user
+        course = request.env['e_courses.course'].sudo().browse(course_id)
+        return http.request.render('e_courses.course_details', {'course': course, 'user': user})
+
 
     @http.route('/course/<int:course_id>/rate', type='http', auth="public", website=True, csrf=False)
     def rate_course(self, course_id, value, **kwargs):
@@ -70,6 +70,7 @@ class WebsiteCourses(http.Controller):
         user_obj = self.pool.get('res.users')
         user_value = user_obj.browse(cr, uid, uid)
         return user_value.login or False
+    
     def courses_controller(self, query=None, tag=None):
         if query:
             courses = request.env['e_courses.course'].search_courses(query)
@@ -78,3 +79,56 @@ class WebsiteCourses(http.Controller):
         else:
             courses = request.env['e_courses.course'].search([])
         return http.request.render('e_courses.website_homepage', {'courses': courses})
+    
+    @http.route('/course/<int:course_id>/enroll', type='http', auth='user', website=True, csrf=False)
+    def enroll_course(self, course_id, **kwargs):
+        # Get the current user
+        user = request.env.user
+
+        # Get the course based on the provided course_id
+        course = request.env['e_courses.course'].sudo().browse(course_id)
+
+        # Check if the user is already enrolled in the course
+        is_enrolled = request.env['e_courses.enroll_course'].sudo().search([
+            ('course_id', '=', course.id),
+            ('user_id', '=', user.id),
+        ])
+        if not is_enrolled:
+            # Enroll the user in the course
+            request.env['e_courses.enroll_course'].sudo().create({
+                'course_id': course.id,
+                'user_id': user.id,
+            })
+
+            # Return success response
+            success_response = {'result': 'success', 'message': 'Enrollment successful','enrolled': True}
+            return Response(json.dumps(success_response), content_type='application/json')
+        else:
+            # The user is already enrolled, return failure response
+            failure_response = {'result': 'failure', 'message': 'User is already enrolled in this course','enrolled': True}
+            return Response(json.dumps(failure_response), content_type='application/json')
+
+    
+    @http.route('/course/<int:course_id>/enrollment_status', type='http', auth='user', website=True, csrf=False)
+    def check_enrollment_status(self, course_id, **kwargs):
+        try:
+            # Get the current user
+            user = http.request.env.user
+
+            # Get the course based on the provided course_id
+            course = http.request.env['e_courses.course'].sudo().browse(course_id)
+
+            # Check if the user is enrolled in the course
+            is_enrolled = http.request.env['e_courses.enroll_course'].sudo().search([
+                ('course_id', '=', course.id),
+                ('user_id', '=', user.id),
+            ])
+
+            # Return enrollment status
+            response_data = {'enrolled': bool(is_enrolled)}
+            return Response(json.dumps(response_data), content_type='application/json')
+
+        except Exception as e:
+            # Handle any exceptions
+            error_response = {'error': str(e)}
+            return Response(json.dumps(error_response), content_type='application/json')

@@ -16,12 +16,13 @@ class Course(models.Model):
     instructor_ids = fields.Many2many('res.partner', string='Instructors')
     created_at = fields.Datetime(string='Created At', default=fields.Datetime.now)
     tags = fields.Many2many('e_courses.course.tag', string='Tags')
-    
+    enrollments = fields.One2many('e_courses.enroll_course','course_id', string='Enrollments')
     lessons = fields.One2many('e_courses.lesson', 'course_id', string='Lessons')
     ratings = fields.One2many('e_courses.rating', 'course_id', string='Ratings')
 
     average_rating = fields.Float(string='Average Rating', compute='compute_average_rating', store=True)
     number_of_ratings = fields.Integer(string='Number of Ratings', compute='compute_number_of_ratings', store=True)
+    number_of_enrollments = fields.Float(string='Number of Enrollments', compute='compute_number_of_enrollments', store=True)
 
     @api.depends('ratings', 'ratings.value')
     def compute_average_rating(self):
@@ -34,6 +35,12 @@ class Course(models.Model):
     def compute_number_of_ratings(self):
         for course in self:
             course.number_of_ratings = len(course.ratings)
+
+   
+    @api.depends('enrollments')
+    def compute_number_of_enrollments(self):
+        for course in self:
+            course.number_of_enrollments = len(course.enrollments)
 
 
     def name_get(self):
@@ -67,6 +74,11 @@ class Course(models.Model):
         specific_value_count = len(self.ratings.filtered(lambda r: r.value == value))
         percentage = (specific_value_count / total_ratings) * 100
         return round(percentage, 2)
+    
+    @api.model
+    def get_number_of_enrollments(self, course_id):
+        course = self.browse(course_id)
+        return course.number_of_enrollments
     
 
     def get_instructor_names(self):

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.rating-stars i');
     let selectedRating = 0;
     let userHasRated = false; // Variable to track whether the user has already rated
+    let userIsEnrolled = false; // Variable to track whether the user is enrolled
 
     stars.forEach(star => {
         star.addEventListener('mouseover', function () {
@@ -21,15 +22,22 @@ document.addEventListener('DOMContentLoaded', function () {
         star.addEventListener('click', function () {
             if (!userHasRated) {
                 const rating = this.getAttribute('data-rating');
-                alert('You rated ' + rating + ' stars!');
+                sendRatingRequest(rating);
                 userHasRated = true; // Set the flag to indicate that the user has rated
                 // Additional logic to update the UI or send the rating to the server if needed
             }
         });
     });
 
+    // Enroll button click event
+    const enrollButton = document.getElementById('enrollButton');
+    if (enrollButton) {
+        enrollButton.addEventListener('click', function () {
+            enrollUser();
+        });
+    }
 
-    // Function to check if the user has already rated
+    // Function to check if the user has already rated and fetch user's previous rating
     function checkUserRating() {
         fetchUserRating(); // Fetch user's previous rating
 
@@ -108,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             const data = JSON.parse(xhr.responseText);
                             if (data.result === 'success') {
                                 selectedRating = data.average_rating;
-                                if(data.user_rating != 0){
+                                if (data.user_rating != 0) {
                                     highlightStars(selectedRating);
                                     disableRating();
                                 }
@@ -138,6 +146,86 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function replaceButtonWithIcon() {
+        // Replace the button with the verified icon and success message
+        const buttonContainer = document.getElementById('buttonContainer');
+        if (buttonContainer) {
+            buttonContainer.innerHTML = '<div class="text-center text-success"><i class="fa fa-check-circle"></i> You have enrolled in this course</div>';
+        }
+    }
+
+    // Function to enroll the user
+    function enrollUser() {
+        const courseId = document.getElementById('courseId').value;
+        const url = `/course/${courseId}/enroll`;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Get the CSRF token from the web core context
+        const csrfTokenInput = document.querySelector('input[name="csrf_token"]');
+        const csrfToken = csrfTokenInput ? csrfTokenInput.value : '';
+        xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.result === 'success') {
+                    replaceButtonWithIcon();
+                } else {
+                    alert('Enrollment failed: ' + response.message);
+                }
+            } else {
+                alert('Error: ' + xhr.statusText);
+            }
+        };
+
+        xhr.onerror = function () {
+            alert('Network error');
+        };
+
+        xhr.send();
+    }
+    
+
+     // Function to check if the user is enrolled in the course
+     function checkEnrollmentStatus() {
+        const courseId = document.getElementById('courseId').value;
+        const url = `/course/${courseId}/enrollment_status`;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        if (data.enrolled) {
+                            replaceButtonWithIcon();
+                        }
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error.message);
+                    }
+                } else {
+                    // Handle the error case if needed
+                    console.error('Error fetching enrollment status:', xhr.statusText);
+                }
+            }
+        };
+
+        xhr.onerror = function () {
+            // Handle any other errors that may occur during the request
+            console.error('Error fetching enrollment status:', 'Network error');
+        };
+
+        xhr.send();
+    }
+
+    // Check if the user has already enrolled the course
+     checkEnrollmentStatus();
     // Check if the user has already rated when the page loads
     checkUserRating();
+    
 });
