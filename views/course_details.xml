@@ -10,14 +10,13 @@
                     <t t-if="user">
                         <!-- Display user information when authenticated -->
                         <div class="user-info">
-                            <img t-att-src="'data:image/png;base64,'+user.partner_id.image_128.decode('utf8')" alt="User Avatar" class="rounded-circle img-fluid" height="40" width="40" style="max-height: 50px; max-width: 50px;"/>
+                          <!-- <img t-att-src="'data:image/png;base64,'+user.partner_id.image_128.decode('utf8')" alt="User Avatar" class="rounded-circle img-fluid" height="40" width="40" style="max-height: 50px; max-width: 50px;"/>--> 
                             <span t-esc="user.name"/>
                         </div>                        
                     </t>
                     <t t-if="not user">
                         <!-- Display login and register buttons when not authenticated -->
-                        <a href="#" class="text-white mx-2">Login</a>
-                        <a href="#" class="btn btn-light">Register</a>
+                        <a href="/web/login" class="text-white mx-2">Login</a>
                     </t>
                 </div>
             </div>
@@ -35,7 +34,7 @@
                     <span class="mb-0 fw-lighter">
                         <a t-attf-href="/courses">Courses</a> / 
                         <a t-attf-href="/course/#{course.id}/details">
-                            <span class="text-white-bold" t-esc="course.title" />
+                            <span class="text-blue-bold" t-esc="course.title" />
                         </a> 
                     </span>
                     <input type="hidden" id="courseId" t-att-value="course.id" />

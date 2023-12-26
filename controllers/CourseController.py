@@ -10,9 +10,9 @@ class WebsiteCourses(http.Controller):
         courses = request.env['e_courses.course'].search([])
         return http.request.render('e_courses.website_homepage', {"courses": courses})
     
-    
     @http.route('/courses', type='http', auth='public', website=True)
     def courses_controller(self, query=None, tag=None):
+        user = request.env.user
         if query:
             courses = request.env['e_courses.course'].search_courses(query)
         elif tag:
@@ -20,9 +20,9 @@ class WebsiteCourses(http.Controller):
         else:
             courses = request.env['e_courses.course'].search([])
         tags= request.env['e_courses.course.tag'].search([])
-        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags})
+        return http.request.render('e_courses.website_explore_courses', {'courses': courses,'tags':tags,'user':user})
     
-    @http.route('/course/<int:course_id>/details', type='http', auth='user', website=True)
+    @http.route('/course/<int:course_id>/details', type='http', auth='public', website=True)
     def courseDetails(self, course_id, **kwargs):
         user = request.env.user
         course = request.env['e_courses.course'].sudo().browse(course_id)
@@ -49,7 +49,7 @@ class WebsiteCourses(http.Controller):
             return Response(json.dumps({'result': 'failed', 'error': str(e)}), content_type='application/json', status=500)
  
 
-    @http.route('/course/<int:course_id>/user_rating', type='http', auth="public", website=True, csrf=False)
+    @http.route('/course/<int:course_id>/user_rating', type='http', auth="user", website=True, csrf=False)
     def get_user_rating(self, course_id, **kwargs):
         try:
             user_id = request.env.user.id if request.env.user else False

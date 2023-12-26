@@ -2,14 +2,27 @@
 <odoo>
     <template id='website_explore_courses' name="Odoo Explore Courses">
         <!-- Header Section -->
-        <header class="bg-primary text-white py-3">
+        <header class="bg-header-primary text-white py-3">
             <div class="container d-flex justify-content-between">
                 <img src="./../../e_courses/static/src/img/logo_white.png" alt="E-Courses" class="img-fluid" style="max-height: 50px;"/>
                 <div class="float-right">
-                    <a href="/courses" class="btn btn-light px-4">Start Learning 🧠</a>
+                    <t t-if="user">
+                        <!-- Display user information when authenticated -->
+                        <div class="user-info">
+                            <!-- <img t-att-src="'data:image/png;base64,'+user.partner_id.image_128.decode('utf8')" alt="User Avatar" class="rounded-circle img-fluid" height="40" width="40" style="max-height: 50px; max-width: 50px;"/>--> 
+                            <span t-esc="user.name"/>
+                        </div>                        
+                    </t>
+                    <t t-if="not user">
+                        <!-- Display login and register buttons when not authenticated -->
+                        <a href="/web/login" class="text-white mx-2">Login</a>
+                    </t>
                 </div>
             </div>
         </header>
+
+        <link rel="stylesheet" href="./../../e_courses/static/css/main.css"/>
+
         <div class="">
             <!-- Include Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
@@ -80,10 +93,10 @@
                                        <div class="card">
                                            <!-- Course Image -->
                                            <t t-if="course.photo">
-                                               <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                               <img t-att-src="'data:image/png;base64,' + course.photo.decode('utf-8')"  class="card-img-top" alt="Course Image" style="object-fit: cover; height: 200px;"/>
                                            </t>
                                            <t t-if="not course.photo">
-                                               <img src="./../../e_courses/static/src/img/course_default_photo.jpeg"  class="card-img-top" alt="Course Image" style="object-fit: cover;height: 40vh;"/>
+                                               <img src="./../../e_courses/static/src/img/course_default_photo.jpeg"  class="card-img-top" alt="Course Image" style="object-fit: cover; height: 200px;"/>
                                            </t>
                                            <!-- Course Details -->
                                            <div class="card-body">
