@@ -2,6 +2,10 @@
 
 E_Courses is an Odoo module designed to provide a comprehensive online platform for managing courses. It empowers administrators to efficiently handle courses and users, while also offering users the ability to explore, enroll, and rate courses.
 
+![image](https://github.com/yassinelkhantach/eLearning-odoo/assets/79177895/05c6aa6f-f61d-45ce-a5c4-174d014f6add)
+
+![image](https://github.com/yassinelkhantach/eLearning-odoo/assets/79177895/3530bd53-6dec-4e5d-a780-4c9a224be637)
+
 ## Features
 
 - **Admin Dashboard:**
@@ -12,6 +16,8 @@ E_Courses is an Odoo module designed to provide a comprehensive online platform 
   - Explore Courses: Browse through the list of available courses.
   - Enroll in Courses: Users can enroll in courses of their choice.
   - Rate Courses: Users can provide ratings and feedback for completed courses.
+ 
+  ![image](https://github.com/yassinelkhantach/eLearning-odoo/assets/79177895/794c7ce9-42be-411d-bcfc-2453ec17b5bc)
 
 ## Installation
 
@@ -77,5 +83,4 @@ For bug reports and feature requests, please use the [GitHub issue tracker](http
 For general support and discussions, visit our [community forum](https://example.com/forum).
 
 ```
-
 Make sure to customize the placeholders, such as `{port}` and `{:id}`, with the actual port number and course ID values in your URLs.
